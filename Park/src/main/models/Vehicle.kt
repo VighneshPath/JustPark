@@ -21,7 +21,7 @@ class Vehicle{
 
     fun unpark() : Receipt? {
         if(isParkedInSpot){
-            val receipt = currentlyParkedIn!!.unreserveSpot(ticket)
+            val receipt = currentlyParkedIn!!.unreserveSpot(ticket!!)
             isParkedInSpot = false
             currentlyParkedIn = null
             ticket = null
