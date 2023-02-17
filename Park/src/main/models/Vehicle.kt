@@ -1,10 +1,14 @@
 package main.models
 
-class Vehicle {
+class Vehicle{
     private var isParkedInSpot = false
-    fun park(): Ticket{
-        isParkedInSpot = true
-        return Ticket(1, 1)
+    fun park(parkingLot: ParkingLot): Ticket?{
+        if(!isParkedInSpot) {
+            val ticket = parkingLot.reserveSpot()
+            isParkedInSpot = true
+            return ticket
+        }
+        return null
     }
 
     fun isParked(): Boolean{
