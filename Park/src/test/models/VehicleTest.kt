@@ -67,4 +67,17 @@ class VehicleTest{
             .comparingOnlyFields("ticketNumber", "spotNumber")
             .isEqualTo(expectedTicket2)
     }
+
+    @DisplayName("should unpark vehicle")
+    @Test
+    fun unparkVehicle(){
+        val car = Vehicle()
+        val expectedParkingStatus = false
+        car.park(parkingLot)
+
+        car.unpark()
+
+        assertEquals(expectedParkingStatus, car.isParked())
+    }
+
 }
