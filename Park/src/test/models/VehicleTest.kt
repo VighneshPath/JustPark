@@ -1,6 +1,7 @@
 package test.models
 
 import main.models.ParkingLot
+import main.models.Receipt
 import main.models.Ticket
 import main.models.Vehicle
 import org.junit.jupiter.api.DisplayName
@@ -13,8 +14,8 @@ import java.time.LocalDateTime
 
 class VehicleTest{
     private lateinit var parkingLot: ParkingLot
-    @BeforeEach
     @DisplayName("should reset parking lot")
+    @BeforeEach
     fun resetParkingLot(){
         parkingLot = ParkingLot()
     }
@@ -78,6 +79,20 @@ class VehicleTest{
         car.unpark()
 
         assertEquals(expectedParkingStatus, car.isParked())
+    }
+
+    @DisplayName("should unpark vehicle and get a receipt")
+    @Test
+    fun unparkAndGetReceipt(){
+        val car = Vehicle()
+        val ticket = car.park(parkingLot)
+        val expectedReceipt = Receipt(1L, 1L, ticket!!.getTicketEntryDateTime())
+
+        val actualReceipt = car.unpark()
+
+        assertThat(actualReceipt).usingRecursiveComparison()
+            .comparingOnlyFields("receiptNumber", "spotNumber")
+            .isEqualTo(expectedReceipt)
     }
 
 }
