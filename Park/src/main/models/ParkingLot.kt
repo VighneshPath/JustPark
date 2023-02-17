@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 class ParkingLot {
     private var ticketCounter = 0L // Only positive, always increasing
     private var receiptCounter = 0L
-    private var spotStatus: MutableList<Boolean> = MutableList<Boolean>(VEHICLE_SPOT_LIMIT) { false }
+    private var spotStatus: MutableList<Boolean> = MutableList(VEHICLE_SPOT_LIMIT) { false }
 
     private fun getNextSpot(): Int{
         for(spot in spotStatus.indices){
