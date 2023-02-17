@@ -11,4 +11,8 @@ data class Ticket(val ticketNumber: Long, val spotNumber: Long, val entryDateTim
     fun getTicketSpotNumber():Long{
         return spotNumber
     }
+
+    fun getSpotNumberForTicket(): Long {
+        return spotNumber
+    }
 }

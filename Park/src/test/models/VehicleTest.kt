@@ -35,7 +35,7 @@ class VehicleTest{
     fun parkAndGetTicket(){
         val car = Vehicle()
         val expectedTicketNumber = 1L
-        val expectedSpotNumber = 1L
+        val expectedSpotNumber = 0L
         val expectedTicket = Ticket(expectedTicketNumber, expectedSpotNumber)
 
         val actualTicket = car.park(parkingLot)
@@ -51,10 +51,10 @@ class VehicleTest{
         val car = Vehicle()
         val car2 = Vehicle()
         val expectedTicketNumber1 = 1L
-        val expectedSpotNumber1 = 1L
+        val expectedSpotNumber1 = 0L
         val expectedTicket1 = Ticket(expectedTicketNumber1, expectedSpotNumber1)
         val expectedTicketNumber2 = 2L
-        val expectedSpotNumber2 = 2L
+        val expectedSpotNumber2 = 1L
         val expectedTicket2 = Ticket(expectedTicketNumber2, expectedSpotNumber2)
 
         val actualTicket1 = car.park(parkingLot)
@@ -85,7 +85,7 @@ class VehicleTest{
     fun unparkAndGetReceipt(){
         val car = Vehicle()
         val ticket = car.park(parkingLot)
-        val expectedReceipt = Receipt(1L, 1L, ticket!!.getTicketEntryDateTime(), 0L)
+        val expectedReceipt = Receipt(1L, 0L, ticket!!.getTicketEntryDateTime(), 0L)
 
         val actualReceipt = car.unpark()
 
@@ -102,10 +102,10 @@ class VehicleTest{
         val ticket1 = car.park(parkingLot)
         val ticket2 = car2.park(parkingLot)
         val expectedReceiptNumber1 = 1L
-        val expectedSpotNumber1 = 1L
+        val expectedSpotNumber1 = 0L
         val expectedReceipt1 = Receipt(expectedReceiptNumber1, expectedSpotNumber1, ticket1!!.getTicketEntryDateTime(), 0L)
         val expectedReceiptNumber2 = 2L
-        val expectedSpotNumber2 = 2L
+        val expectedSpotNumber2 = 1L
         val expectedReceipt2 = Receipt(expectedReceiptNumber2, expectedSpotNumber2, ticket2!!.getTicketEntryDateTime(), 0L)
 
         val actualReceipt1 = car.unpark()
@@ -117,6 +117,24 @@ class VehicleTest{
         assertThat(actualReceipt2).usingRecursiveComparison()
             .comparingOnlyFields("receiptNumber", "spotNumber")
             .isEqualTo(expectedReceipt2)
+    }
+
+    @DisplayName("should park and unpark vehicles to get first free spot")
+    @Test
+    fun parkAndUnparkMultipleAndGetTicketWithSameSpot(){
+        val car = Vehicle()
+        car.park(parkingLot)
+        val car2 = Vehicle()
+        car2.park(parkingLot)
+        car.unpark()
+        val car3 = Vehicle()
+        val expectedTicket = Ticket(3L, 0L)
+
+        val actualTicket = car3.park(parkingLot)
+
+        assertThat(actualTicket).usingRecursiveComparison()
+            .comparingOnlyFields("ticketNumber", "spotNumber")
+            .isEqualTo(expectedTicket)
     }
 
 }
