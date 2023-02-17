@@ -80,12 +80,12 @@ class VehicleTest{
         assertEquals(expectedParkingStatus, car.isParked())
     }
 
-    @DisplayName("should unpark vehicle and get a receipt")
+    @DisplayName("should unpark vehicle and get a receipt with fee")
     @Test
     fun unparkAndGetReceipt(){
         val car = Vehicle()
         val ticket = car.park(parkingLot)
-        val expectedReceipt = Receipt(1L, 1L, ticket!!.getTicketEntryDateTime())
+        val expectedReceipt = Receipt(1L, 1L, ticket!!.getTicketEntryDateTime(), 0L)
 
         val actualReceipt = car.unpark()
 
@@ -103,10 +103,10 @@ class VehicleTest{
         val ticket2 = car2.park(parkingLot)
         val expectedReceiptNumber1 = 1L
         val expectedSpotNumber1 = 1L
-        val expectedReceipt1 = Receipt(expectedReceiptNumber1, expectedSpotNumber1, ticket1!!.getTicketEntryDateTime())
+        val expectedReceipt1 = Receipt(expectedReceiptNumber1, expectedSpotNumber1, ticket1!!.getTicketEntryDateTime(), 0L)
         val expectedReceiptNumber2 = 2L
         val expectedSpotNumber2 = 2L
-        val expectedReceipt2 = Receipt(expectedReceiptNumber2, expectedSpotNumber2, ticket2!!.getTicketEntryDateTime())
+        val expectedReceipt2 = Receipt(expectedReceiptNumber2, expectedSpotNumber2, ticket2!!.getTicketEntryDateTime(), 0L)
 
         val actualReceipt1 = car.unpark()
         val actualReceipt2 = car2.unpark()
