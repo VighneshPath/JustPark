@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
-import java.time.LocalDateTime
 
 
 class VehicleTest{
@@ -93,6 +92,31 @@ class VehicleTest{
         assertThat(actualReceipt).usingRecursiveComparison()
             .comparingOnlyFields("receiptNumber", "spotNumber")
             .isEqualTo(expectedReceipt)
+    }
+
+    @DisplayName("should park and unpark multiple vehicle different spots and get receipts")
+    @Test
+    fun parkAndUnparkMultipleAndGetMultipleReceipt(){
+        val car = Vehicle()
+        val car2 = Vehicle()
+        val ticket1 = car.park(parkingLot)
+        val ticket2 = car2.park(parkingLot)
+        val expectedReceiptNumber1 = 1L
+        val expectedSpotNumber1 = 1L
+        val expectedReceipt1 = Receipt(expectedReceiptNumber1, expectedSpotNumber1, ticket1!!.getTicketEntryDateTime())
+        val expectedReceiptNumber2 = 2L
+        val expectedSpotNumber2 = 2L
+        val expectedReceipt2 = Receipt(expectedReceiptNumber2, expectedSpotNumber2, ticket2!!.getTicketEntryDateTime())
+
+        val actualReceipt1 = car.unpark()
+        val actualReceipt2 = car2.unpark()
+
+        assertThat(actualReceipt1).usingRecursiveComparison()
+            .comparingOnlyFields("receiptNumber", "spotNumber")
+            .isEqualTo(expectedReceipt1)
+        assertThat(actualReceipt2).usingRecursiveComparison()
+            .comparingOnlyFields("receiptNumber", "spotNumber")
+            .isEqualTo(expectedReceipt2)
     }
 
 }
