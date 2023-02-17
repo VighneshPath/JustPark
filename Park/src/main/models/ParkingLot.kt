@@ -36,10 +36,10 @@ class ParkingLot {
         return null
     }
 
-    fun unreserveSpot(ticket: Ticket?): Receipt {
+    fun unreserveSpot(ticket: Ticket): Receipt {
         receiptCounter+=1
         val exitTime = LocalDateTime.now()
-        val spot = ticket!!.getSpotNumberForTicket().toInt()
+        val spot = ticket.getSpotNumberForTicket().toInt()
         removeSpot(spot)
         val duration = Duration.between(ticket.getTicketEntryDateTime(), exitTime).toHours()
         return Receipt(receiptCounter, ticket.getTicketSpotNumber(), ticket.getTicketEntryDateTime(), FEE_PER_HOUR*duration)
