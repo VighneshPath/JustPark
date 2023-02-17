@@ -2,6 +2,8 @@ package main.models
 
 import main.constants.FEE_PER_HOUR
 import main.constants.VEHICLE_SPOT_LIMIT
+import main.exceptions.NoSpotAvailableException
+import main.exceptions.SpotNotFoundException
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -25,7 +27,7 @@ class ParkingLot {
         return false
     }
 
-    fun reserveSpot(): Ticket?{
+    fun reserveSpot(): Ticket{
         val spot = getNextSpot()
         if(spot!=-1){
             spotStatus[spot] = true
@@ -33,7 +35,7 @@ class ParkingLot {
 
             return Ticket(ticketCounter, spot.toLong())
         }
-        return null
+        throw NoSpotAvailableException()
     }
 
     fun unreserveSpot(ticket: Ticket): Receipt {

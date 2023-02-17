@@ -1,25 +1,28 @@
 package main.models
 
+import main.exceptions.VehicleAlreadyParkedException
+import main.exceptions.VehicleIsNotParkedException
+
 class Vehicle{
     private var isParkedInSpot = false
     private var currentlyParkedIn : ParkingLot? = null
     private var ticket: Ticket? = null
-    fun park(parkingLot: ParkingLot): Ticket?{
+    fun park(parkingLot: ParkingLot): Ticket{
         if(!isParkedInSpot) {
             val ticket = parkingLot.reserveSpot()
-            this.ticket = ticket!!
+            this.ticket = ticket
             isParkedInSpot = true
             currentlyParkedIn = parkingLot
             return ticket
         }
-        return null
+        throw VehicleAlreadyParkedException()
     }
 
     fun isParked(): Boolean{
         return isParkedInSpot
     }
 
-    fun unpark() : Receipt? {
+    fun unpark() : Receipt {
         if(isParkedInSpot){
             val receipt = currentlyParkedIn!!.unreserveSpot(ticket!!)
             isParkedInSpot = false
@@ -27,7 +30,7 @@ class Vehicle{
             ticket = null
             return receipt
         }
-        return null
+        throw VehicleIsNotParkedException()
     }
 
 }
