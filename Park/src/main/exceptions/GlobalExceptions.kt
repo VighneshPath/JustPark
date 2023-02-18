@@ -8,3 +8,4 @@ class VehicleAlreadyParkedException: Exception("Vehicle is already parked")
 
 class VehicleIsNotParkedException: Exception("Vehicle is not parked")
 
+class InvalidExitTimeException: Exception("Exit time must be later than entry time")

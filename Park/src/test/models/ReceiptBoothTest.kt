@@ -1,7 +1,9 @@
 package test.models
 
+import main.exceptions.InvalidExitTimeException
 import main.models.*
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -28,5 +30,15 @@ class ReceiptBoothTest{
         val actualReceipt = receiptBooth.getReceipt(ticket, exitTime)
 
         assertEquals(expectedReceipt, actualReceipt)
+    }
+
+    @DisplayName("should throw an exception if exit time provided is less that entry time")
+    @Test
+    fun shouldThrowAnErrorForInvalidExitTime(){
+        val ticket = Ticket(1L, 1L)
+        val exitTime = LocalDateTime.now().minusDays(1)
+        val expectedErrorMessage = "Exit time must be later than entry time"
+
+        assertThrows<InvalidExitTimeException>(expectedErrorMessage){receiptBooth.getReceipt(ticket, exitTime)}
     }
 }
