@@ -1,9 +1,8 @@
 package main.models
 
 import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
 
-data class Ticket(val ticketNumber: Long, val spotNumber: Long, val entryDateTime: LocalDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)) {
+data class Ticket(private val ticketNumber: Long, private val spotNumber: Long, private val entryDateTime: LocalDateTime) {
     fun getTicketEntryDateTime():LocalDateTime{
         return entryDateTime
     }

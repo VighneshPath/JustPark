@@ -8,6 +8,7 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
     private var receiptCounter: Long = 0
     fun getReceipt(ticket: Ticket, exitTime: LocalDateTime): Receipt {
         if(exitTime.isBefore(ticket.getTicketEntryDateTime())) throw InvalidExitTimeException()
+
         receiptCounter++
 
         val duration = Duration.between(ticket.getTicketEntryDateTime(), exitTime).toHours()

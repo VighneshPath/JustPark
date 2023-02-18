@@ -37,7 +37,7 @@ class VehicleTest{
         val car = Vehicle()
         val expectedTicketNumber = 1L
         val expectedSpotNumber = 0L
-        val expectedTicket = Ticket(expectedTicketNumber, expectedSpotNumber)
+        val expectedTicket = Ticket(expectedTicketNumber, expectedSpotNumber, LocalDateTime.now())
 
         val actualTicket = car.park(parkingLot)
 
@@ -53,10 +53,10 @@ class VehicleTest{
         val car2 = Vehicle()
         val expectedTicketNumber1 = 1L
         val expectedSpotNumber1 = 0L
-        val expectedTicket1 = Ticket(expectedTicketNumber1, expectedSpotNumber1)
+        val expectedTicket1 = Ticket(expectedTicketNumber1, expectedSpotNumber1, LocalDateTime.now())
         val expectedTicketNumber2 = 2L
         val expectedSpotNumber2 = 1L
-        val expectedTicket2 = Ticket(expectedTicketNumber2, expectedSpotNumber2)
+        val expectedTicket2 = Ticket(expectedTicketNumber2, expectedSpotNumber2, LocalDateTime.now())
 
         val actualTicket1 = car.park(parkingLot)
         val actualTicket2 = car2.park(parkingLot)
@@ -129,7 +129,7 @@ class VehicleTest{
         car2.park(parkingLot)
         car.unpark()
         val car3 = Vehicle()
-        val expectedTicket = Ticket(3L, 0L)
+        val expectedTicket = Ticket(3L, 0L, LocalDateTime.now())
 
         val actualTicket = car3.park(parkingLot)
 

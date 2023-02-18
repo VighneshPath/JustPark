@@ -33,7 +33,7 @@ class ParkingLot {
             spotStatus[spot] = true
             ticketCounter+=1
 
-            return Ticket(ticketCounter, spot.toLong())
+            return Ticket(ticketCounter, spot.toLong(), LocalDateTime.now())
         }
         throw NoSpotAvailableException()
     }

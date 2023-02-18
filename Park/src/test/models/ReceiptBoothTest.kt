@@ -23,7 +23,7 @@ class ReceiptBoothTest{
     @DisplayName("should get a receipt when a ticket is provided")
     @Test
     fun shouldGetAReceiptWhenGivenATicket(){
-        val ticket = Ticket(1L, 1L)
+        val ticket = Ticket(1L, 1L, LocalDateTime.now())
         val exitTime = LocalDateTime.now()
         val expectedReceipt = Receipt(1L, 1L, ticket.getTicketEntryDateTime(), 10, exitTime)
 
@@ -35,7 +35,7 @@ class ReceiptBoothTest{
     @DisplayName("should throw an exception if exit time provided is less that entry time")
     @Test
     fun shouldThrowAnErrorForInvalidExitTime(){
-        val ticket = Ticket(1L, 1L)
+        val ticket = Ticket(1L, 1L, LocalDateTime.now())
         val exitTime = LocalDateTime.now().minusDays(1)
         val expectedErrorMessage = "Exit time must be later than entry time"
 
