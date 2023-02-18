@@ -2,6 +2,10 @@ package test.models
 
 import main.exceptions.InvalidExitTimeException
 import main.models.*
+import main.models.feecalculators.FeeCalculator
+import main.models.feecalculators.HourlyFeeCalculator
+import main.models.feemodels.CarForParkingLotFeeModel
+import main.models.feemodels.FeeModel
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.BeforeEach
