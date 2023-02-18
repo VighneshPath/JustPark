@@ -44,6 +44,6 @@ class ParkingLot {
         val spot = ticket.getSpotNumberForTicket().toInt()
         removeSpot(spot)
         val duration = Duration.between(ticket.getTicketEntryDateTime(), exitTime).toHours()
-        return Receipt(receiptCounter, ticket.getTicketSpotNumber(), ticket.getTicketEntryDateTime(), FEE_PER_HOUR*duration)
+        return Receipt(receiptCounter, ticket.getTicketSpotNumber(), ticket.getTicketEntryDateTime(), FEE_PER_HOUR*duration, exitTime)
     }
 }
