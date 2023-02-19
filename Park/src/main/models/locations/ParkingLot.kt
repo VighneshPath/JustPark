@@ -1,18 +1,28 @@
 package main.models.locations
 
+import main.exceptions.TicketDoesNotExistException
 import main.models.*
 import main.models.vehicles.Vehicle
 import java.time.LocalDateTime
 
-class ParkingLot(override val ticketBooth: TicketBooth, override val receiptBooth: ReceiptBooth) : Location {
+class ParkingLot(override val ticketBooth: TicketBooth,
+                 override val receiptBooth: ReceiptBooth,
+                 override val spotTracker: SpotTracker
+) : Location {
     override fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket? {
-        val ticket = ticketBooth.getTicket(1L, entryTime)
-        vehicle.setTicketTo(ticket)
-        return Ticket(1L, 1L, entryTime)
+        val spot = spotTracker.getNextAvailableSpot()
+        if (spot != null) {
+            spotTracker.setSpotTo(spot.getSpotsNumber(), vehicle)
+            val ticket = ticketBooth.getTicket(spot.getSpotsNumber(), entryTime)
+            vehicle.setTicketTo(ticket)
+            return ticket
+        }
+        return null
     }
 
     override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt? {
-        val ticket = vehicle.getVehicleTicket()?:return null
+        val ticket = vehicle.getVehicleTicket()?: throw TicketDoesNotExistException()
+        spotTracker.clearSpot(ticket.getSpotNumberForTicket())
         return receiptBooth.getReceipt(ticket, exitTime)
     }
 }

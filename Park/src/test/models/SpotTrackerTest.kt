@@ -20,7 +20,7 @@ class SpotTrackerTest{
     @DisplayName("should get 1st spot")
     @Test
     fun getFirstAvailableSpot(){
-        val expectedSpot = Spot(0L)
+        val expectedSpot = Spot(1L)
 
         val actualSpot = spotTracker.getNextAvailableSpot()
 
@@ -31,7 +31,7 @@ class SpotTrackerTest{
     @Test
     fun fillUpSpots(){
         val car = Car()
-        for(index in 0 until 100L){
+        for(index in 1 .. 100L){
             spotTracker.setSpotTo(index, car)
         }
         val expectedSpot: Spot? = null

@@ -3,24 +3,24 @@ package main.models
 import main.exceptions.SpotDoesNotExistException
 import main.models.vehicles.Vehicle
 
-class SpotTracker(totalSpots: Long) {
+class SpotTracker(private val totalSpots: Long) {
     private var spots: MutableMap<Long, Spot> = mutableMapOf()
 
     init{
-        for(spot in 0 until totalSpots){
+        for(spot in 0.. totalSpots){
             spots[spot] = Spot(spot)
         }
     }
 
     fun getNextAvailableSpot(): Spot?{
-        spots.forEach{
-            if(!it.value.isSpotTaken()) return it.value
+        for(spot in 1..totalSpots){
+            if(!spots[spot]!!.isSpotTaken()) return spots[spot]
         }
         return null
     }
 
     private fun isSpotTaken(spotNumber: Long): Boolean {
-        if(spotNumber >= spots.size || spotNumber < 0){
+        if(spotNumber >= spots.size || spotNumber <= 0){
             throw SpotDoesNotExistException()
         }
         return spots[spotNumber]!!.isSpotTaken()

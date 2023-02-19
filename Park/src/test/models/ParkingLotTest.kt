@@ -20,14 +20,17 @@ class ParkingLotTest{
     private lateinit var feeCalculator: FeeCalculator
     private lateinit var feeModel: FeeModel
     private lateinit var parkingLot: ParkingLot
+    private lateinit var spotTracker: SpotTracker
     @BeforeEach
     fun setBoothsAndParkingLot(){
         feeCalculator = HourlyFeeCalculator()
         feeModel = CarForParkingLotFeeModel()
         receiptBooth = ReceiptBooth(feeCalculator, feeModel)
         ticketBooth = TicketBooth()
+        val totalSpots = 100L
+        spotTracker = SpotTracker(totalSpots)
 
-        parkingLot = ParkingLot(ticketBooth, receiptBooth)
+        parkingLot = ParkingLot(ticketBooth, receiptBooth, spotTracker)
     }
     @Test
     @DisplayName("should park a vehicle")
@@ -76,5 +79,52 @@ class ParkingLotTest{
 
         assertEquals(expectedTicket1, actualTicket1)
         assertEquals(expectedTicket2, actualTicket2)
+    }
+
+    @DisplayName("should unpark multiple vehicles")
+    @Test
+    fun unparkMultiple(){
+        val car1 = Car()
+        val car2 = Car()
+        val entryTime = LocalDateTime.now()
+        parkingLot.parkVehicle(car1, entryTime)
+        parkingLot.parkVehicle(car2, entryTime)
+        val exitTime = LocalDateTime.now()
+        val duration = Duration.between(exitTime, entryTime).toHours()
+        val rate = feeModel.getRate()
+        val expectedReceipt1 = Receipt(1L,
+            1L,
+            entryTime,
+            feeCalculator.calculateFee(duration, rate),
+            exitTime
+        )
+        val expectedReceipt2 = Receipt(2L,
+            2L,
+            entryTime,
+            feeCalculator.calculateFee(duration, rate),
+            exitTime
+        )
+
+        val actualReceipt1 = parkingLot.unparkVehicle(car1, exitTime)
+        val actualReceipt2 = parkingLot.unparkVehicle(car2, exitTime)
+
+        assertEquals(expectedReceipt1, actualReceipt1)
+        assertEquals(expectedReceipt2, actualReceipt2)
+    }
+
+    @DisplayName("should give the 1st unparked vehicles spot to a new vehicle")
+    @Test
+    fun reuseSpotForPark(){
+        val car1 = Car()
+        val car2 = Car()
+        val entryTime1 = LocalDateTime.now()
+        parkingLot.parkVehicle(car1, entryTime1)
+        parkingLot.unparkVehicle(car1, LocalDateTime.now())
+        val entryTime2 = LocalDateTime.now()
+        val expectedTicket = Ticket(2L, 1L, entryTime2)
+
+        val actualTicket = parkingLot.parkVehicle(car2, entryTime2)
+
+        assertEquals(expectedTicket, actualTicket)
     }
 }
