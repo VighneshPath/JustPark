@@ -61,4 +61,20 @@ class ParkingLotTest{
 
         assertEquals(expectedReceipt, actualReceipt)
     }
+
+    @DisplayName("should park multiple vehicles")
+    @Test
+    fun parkMultiple(){
+        val car1 = Car()
+        val car2 = Car()
+        val entryTime = LocalDateTime.now()
+        val expectedTicket1 = Ticket(1L, 1L, entryTime)
+        val expectedTicket2 = Ticket(2L, 2L, entryTime)
+
+        val actualTicket1 = parkingLot.parkVehicle(car1, entryTime)
+        val actualTicket2 = parkingLot.parkVehicle(car2, entryTime)
+
+        assertEquals(expectedTicket1, actualTicket1)
+        assertEquals(expectedTicket2, actualTicket2)
+    }
 }

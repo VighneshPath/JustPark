@@ -12,7 +12,7 @@ class SpotTest {
     private lateinit var spot: Spot
     @BeforeEach
     fun setUp() {
-        spot = Spot()
+        spot = Spot(1L)
     }
     @DisplayName("reserve a spot")
     @Test
@@ -23,6 +23,7 @@ class SpotTest {
         spot.reserveSpot(car)
 
         assertEquals(expectedSpotStatus, spot.isSpotTaken())
+        assertEquals(1L, spot.getSpotsNumber())
     }
 
     @DisplayName("unreserve a spot")
@@ -35,5 +36,6 @@ class SpotTest {
         spot.unreserveSpot()
 
         assertEquals(expectedSpotStatus, spot.isSpotTaken())
+        assertEquals(1L, spot.getSpotsNumber())
     }
 }
