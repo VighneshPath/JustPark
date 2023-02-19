@@ -1,10 +1,7 @@
 package main.exceptions
 
-class SpotNotFoundException: Exception("Spot not found")
+class InvalidExitTimeException: Exception("Exit time must be later than entry time")
 
-class NoSpotAvailableException: Exception("No spot available")
+class SpotDoesNotExistException: Exception("Given spot does not exist")
 
-class VehicleAlreadyParkedException: Exception("Vehicle is already parked")
-
-class VehicleIsNotParkedException: Exception("Vehicle is not parked")
-
+class TicketDoesNotExistException: Exception("Ticket does not exist")
