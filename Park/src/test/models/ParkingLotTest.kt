@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.time.Duration
 import java.time.LocalDateTime
 
 class ParkingLotTest{
@@ -38,5 +39,26 @@ class ParkingLotTest{
         val actualTicket = parkingLot.parkVehicle(car, entryTime)
 
         assertEquals(expectedTicket, actualTicket)
+    }
+
+    @Test
+    @DisplayName("should unpark a vehicle")
+    fun unparkAVehicle(){
+        val car = Car()
+        val entryTime = LocalDateTime.now()
+        parkingLot.parkVehicle(car, entryTime)
+        val rate = feeModel.getRate()
+        val exitTime = LocalDateTime.now()
+        val duration = Duration.between(exitTime, entryTime).toHours()
+        val expectedReceipt = Receipt(1L,
+            1L,
+            entryTime,
+            feeCalculator.calculateFee(duration, rate),
+            exitTime
+        )
+
+        val actualReceipt = parkingLot.unparkVehicle(car, exitTime)
+
+        assertEquals(expectedReceipt, actualReceipt)
     }
 }
