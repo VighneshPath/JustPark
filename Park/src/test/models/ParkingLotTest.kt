@@ -127,4 +127,25 @@ class ParkingLotTest{
 
         assertEquals(expectedTicket, actualTicket)
     }
+
+    @DisplayName("should park a vehicle for multiple hours")
+    @Test
+    fun parkForMultipleHours() {
+        val car1 = Car()
+        val entryTime = LocalDateTime.now().minusDays(2)
+        val exitTime = LocalDateTime.now()
+        val duration = Duration.between(entryTime, exitTime).toHours()
+        parkingLot.parkVehicle(car1, entryTime)
+        val expectedReceipt = Receipt(
+            1L,
+            1L,
+            entryTime,
+            duration * feeModel.getRate(),
+            exitTime
+        )
+
+        val actualReceipt = parkingLot.unparkVehicle(car1, exitTime)
+
+        assertEquals(expectedReceipt, actualReceipt)
+    }
 }
