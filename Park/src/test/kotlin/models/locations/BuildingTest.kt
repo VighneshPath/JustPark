@@ -1,6 +1,6 @@
 package models.locations
 
-import models.Receipt
+import models.receipts.Receipt
 import models.ReceiptBooth
 import models.tickets.NormalTicket
 import models.TicketBooth
@@ -8,6 +8,7 @@ import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
 import models.feemodels.FeeModel
+import models.receipts.NormalReceipt
 import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -71,7 +72,7 @@ class BuildingTest{
         val rate = feeModel.getRate()
         val duration = Duration.between(entryTime, exitTime).toHours()
         val fee = feeCalculator.calculateFee(duration, rate)
-        val expectedReceipt = Receipt(1L, 1L, 1L, entryTime, fee, exitTime)
+        val expectedReceipt = NormalReceipt(1L, 1L, 1L, entryTime, fee, exitTime)
 
         val actualReceipt = building.unparkVehicle(car1, exitTime)
 
@@ -106,7 +107,7 @@ class BuildingTest{
         val duration = Duration.between(entryTime, exitTime).toHours()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
         building.parkVehicle(car1, entryTime)
-        val expectedReceipt = Receipt(
+        val expectedReceipt = NormalReceipt(
             1L,
             1L,
             1L,
@@ -131,5 +132,20 @@ class BuildingTest{
         val actualTicket = building.parkVehicle(car1, entryTime)
 
         assertEquals(true, actualTicket.isNull())
+    }
+
+    @DisplayName("should get a null receipt")
+    @Test
+    fun getANullReceipt() {
+        val car1 = Car()
+        val floorsWithSize=listOf(1L)
+        val entryTime = LocalDateTime.now()
+        val exitTime = LocalDateTime.now()
+        val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+
+        car1.setTicketTo(NormalTicket(1L, 1L, 1L, entryTime))
+        val actualReceipt = building.unparkVehicle(car1, exitTime)
+
+        assertEquals(true, actualReceipt.isNull())
     }
 }

@@ -1,8 +1,11 @@
 package models.locations
 
 import exceptions.FloorDoesNotExistException
+import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
 import models.*
+import models.receipts.NullReceipt
+import models.receipts.Receipt
 import models.tickets.NullTicket
 import models.tickets.Ticket
 import models.vehicles.Vehicle
@@ -53,13 +56,16 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
         return NullTicket()
     }
 
-    override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt? {
+    override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
         val ticket = vehicle.getVehicleTicket() ?: throw TicketDoesNotExistException()
+        if(ticket.getSpotNumberForTicket() <= 0 || ticket.getFloorNumberForTicket() <= 0){
+            throw InvalidTicketException()
+        }
         val floor = floors[ticket.getFloorNumberForTicket()]?: throw FloorDoesNotExistException()
         if (floor.clearSpot(ticket.getSpotNumberForTicket())) {
             vehicle.clearTicket()
             return receiptBooth.getReceipt(ticket, exitTime)
         }
-        return null
+        return NullReceipt()
     }
 }

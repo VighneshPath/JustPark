@@ -1,7 +1,7 @@
 package models.locations
 
 import models.vehicles.Vehicle
-import models.*
+import models.receipts.Receipt
 import models.tickets.Ticket
 import java.time.LocalDateTime
 

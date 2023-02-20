@@ -5,6 +5,8 @@ import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
 import models.feemodels.FeeModel
+import models.receipts.NormalReceipt
+import models.receipts.Receipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
@@ -29,7 +31,7 @@ class ReceiptBoothTest{
     fun shouldGetAReceiptWhenGivenATicket(){
         val ticket = NormalTicket(1L, 1L,1L, LocalDateTime.now())
         val exitTime = LocalDateTime.now()
-        val expectedReceipt = Receipt(1L, 1L, 1L, ticket.getTicketEntryDateTime(), 10, exitTime)
+        val expectedReceipt = NormalReceipt(1L, 1L, 1L, ticket.getTicketEntryDateTime(), 10, exitTime)
 
         val actualReceipt = receiptBooth.getReceipt(ticket, exitTime)
 
