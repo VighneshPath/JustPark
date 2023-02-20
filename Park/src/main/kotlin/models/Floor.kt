@@ -4,7 +4,7 @@ import main.constants.VEHICLE_SPOT_LIMIT
 import main.exceptions.SpotDoesNotExistException
 import main.models.vehicles.Vehicle
 
-class SpotTracker(private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
+class Floor(private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
     private var spots: MutableMap<Long, Spot> = mutableMapOf()
 
     init {

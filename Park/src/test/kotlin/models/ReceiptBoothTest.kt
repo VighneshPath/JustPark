@@ -1,4 +1,4 @@
-package test.models
+package models
 
 import main.exceptions.InvalidExitTimeException
 import main.models.*
