@@ -1,4 +1,4 @@
-package test.models
+package models.locations
 
 import main.exceptions.TicketDoesNotExistException
 import main.models.*
@@ -22,7 +22,7 @@ class ParkingLotTest{
     private lateinit var feeCalculator: FeeCalculator
     private lateinit var feeModel: FeeModel
     private lateinit var parkingLot: ParkingLot
-    private lateinit var spotTracker: SpotTracker
+    private lateinit var floor: Floor
     @BeforeEach
     fun setBoothsAndParkingLot(){
         feeCalculator = HourlyFeeCalculator()
@@ -30,9 +30,9 @@ class ParkingLotTest{
         receiptBooth = ReceiptBooth(feeCalculator, feeModel)
         ticketBooth = TicketBooth()
         val totalSpots = 100L
-        spotTracker = SpotTracker(totalSpots)
+        floor = Floor(totalSpots)
 
-        parkingLot = ParkingLot(ticketBooth, receiptBooth, spotTracker)
+        parkingLot = ParkingLot(ticketBooth, receiptBooth, floor)
     }
     @Test
     @DisplayName("should park a vehicle")

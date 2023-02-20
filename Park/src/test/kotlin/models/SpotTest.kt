@@ -1,4 +1,4 @@
-package test.models
+package models
 
 import main.models.Spot
 import main.models.vehicles.Car
