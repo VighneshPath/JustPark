@@ -6,7 +6,6 @@ import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
 import models.feemodels.FeeModel
 import models.receipts.NormalReceipt
-import models.receipts.Receipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows

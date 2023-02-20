@@ -3,7 +3,6 @@ package models.locations
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
-import models.receipts.Receipt
 import models.ReceiptBooth
 import models.tickets.NormalTicket
 import models.TicketBooth
