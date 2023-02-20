@@ -15,4 +15,9 @@ class Car : Vehicle {
         this.ticket = ticket
         return true
     }
+
+    override fun clearTicket(): Boolean {
+        this.ticket = null
+        return true
+    }
 }
