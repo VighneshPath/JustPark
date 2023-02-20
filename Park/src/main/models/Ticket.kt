@@ -7,7 +7,6 @@ data class Ticket(private val ticketNumber: Long, private val spotNumber: Long, 
         return entryDateTime
     }
 
-
     fun getSpotNumberForTicket(): Long {
         return spotNumber
     }
