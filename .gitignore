@@ -54,4 +54,8 @@ Park/.classpath
 # Java heap dump
 Park/*.hprof
 
+build
+
+gradle
+
 # End of https://www.toptal.com/developers/gitignore/api/gradle,kotlin
