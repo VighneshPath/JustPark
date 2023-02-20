@@ -1,6 +1,6 @@
 package models
 
-import main.exceptions.SpotDoesNotExistException
+import exceptions.SpotDoesNotExistException
 import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach

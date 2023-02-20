@@ -1,6 +1,6 @@
 package models
 
-import main.exceptions.InvalidExitTimeException
+import exceptions.InvalidExitTimeException
 import models.feecalculators.FeeCalculator
 import models.feemodels.FeeModel
 import java.time.Duration
@@ -16,6 +16,7 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
         val duration = Duration.between(ticket.getTicketEntryDateTime(), exitTime).toHours()
 
         return Receipt(receiptCounter,
+            ticket.getFloorNumberForTicket(),
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
             feeCalculator.calculateFee(duration, feeModel.getRate()),

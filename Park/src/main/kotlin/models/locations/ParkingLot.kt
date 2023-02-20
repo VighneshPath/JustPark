@@ -1,6 +1,6 @@
 package models.locations
 
-import main.exceptions.TicketDoesNotExistException
+import exceptions.TicketDoesNotExistException
 import models.vehicles.Vehicle
 import models.*
 import java.time.LocalDateTime

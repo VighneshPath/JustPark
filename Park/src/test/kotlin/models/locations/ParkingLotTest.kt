@@ -1,6 +1,6 @@
 package models.locations
 
-import main.exceptions.TicketDoesNotExistException
+import exceptions.TicketDoesNotExistException
 import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
@@ -56,6 +56,7 @@ class ParkingLotTest{
         val duration = Duration.between(exitTime, entryTime).toHours()
         val expectedReceipt = Receipt(1L,
             1L,
+            1L,
             entryTime,
             feeCalculator.calculateFee(duration, rate),
             exitTime
@@ -95,11 +96,13 @@ class ParkingLotTest{
         val rate = feeModel.getRate()
         val expectedReceipt1 = Receipt(1L,
             1L,
+            1L,
             entryTime,
             feeCalculator.calculateFee(duration, rate),
             exitTime
         )
         val expectedReceipt2 = Receipt(2L,
+            1L,
             2L,
             entryTime,
             feeCalculator.calculateFee(duration, rate),
@@ -138,6 +141,7 @@ class ParkingLotTest{
         val duration = Duration.between(entryTime, exitTime).toHours()
         parkingLot.parkVehicle(car1, entryTime)
         val expectedReceipt = Receipt(
+            1L,
             1L,
             1L,
             entryTime,

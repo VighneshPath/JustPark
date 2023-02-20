@@ -1,7 +1,7 @@
 package models
 
-import main.constants.VEHICLE_SPOT_LIMIT
-import main.exceptions.SpotDoesNotExistException
+import constants.VEHICLE_SPOT_LIMIT
+import exceptions.SpotDoesNotExistException
 import models.vehicles.Vehicle
 
 class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {

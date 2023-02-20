@@ -1,6 +1,6 @@
 package models
 
-import main.exceptions.InvalidExitTimeException
+import exceptions.InvalidExitTimeException
 import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
@@ -28,7 +28,7 @@ class ReceiptBoothTest{
     fun shouldGetAReceiptWhenGivenATicket(){
         val ticket = Ticket(1L, 1L,1L, LocalDateTime.now())
         val exitTime = LocalDateTime.now()
-        val expectedReceipt = Receipt(1L, 1L, ticket.getTicketEntryDateTime(), 10, exitTime)
+        val expectedReceipt = Receipt(1L, 1L, 1L, ticket.getTicketEntryDateTime(), 10, exitTime)
 
         val actualReceipt = receiptBooth.getReceipt(ticket, exitTime)
 

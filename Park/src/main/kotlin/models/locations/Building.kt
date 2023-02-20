@@ -1,11 +1,12 @@
 package models.locations
 
+import exceptions.FloorDoesNotExistException
+import exceptions.TicketDoesNotExistException
 import models.*
-import models.vehicles.Car
 import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
-class Building(val ticketBooth: TicketBooth, val receiptBooth: ReceiptBooth, private val floorSizes: List<Long>) {
+class Building(private val ticketBooth: TicketBooth, private val receiptBooth: ReceiptBooth, private val floorSizes: List<Long>) {
     private var floors: MutableMap<Long, Floor> = mutableMapOf()
 
     init {
@@ -16,7 +17,11 @@ class Building(val ticketBooth: TicketBooth, val receiptBooth: ReceiptBooth, pri
     }
 
     private fun getNextAvailableFloor(): Floor? {
-        return floors[1]
+        for(index in 1L until floors.size){
+            if(!floors[index]!!.isFull()) return floors[index]
+        }
+
+        return null
     }
 
     fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket? {
@@ -25,13 +30,23 @@ class Building(val ticketBooth: TicketBooth, val receiptBooth: ReceiptBooth, pri
             val spot = floor.getNextAvailableSpot()
             if(spot != null){
                 floor.setSpotTo(spot.getSpotsNumber(), vehicle)
-                val ticket = ticketBooth.getTicket(spot.getSpotsNumber(),
-                    floor.getFloorNumber(),
+                val ticket = ticketBooth.getTicket(floor.getFloorNumber(),
+                    spot.getSpotsNumber(),
                     entryTime
                 )
                 vehicle.setTicketTo(ticket)
                 return ticket
             }
+        }
+        return null
+    }
+
+    fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt? {
+        val ticket = vehicle.getVehicleTicket() ?: throw TicketDoesNotExistException()
+        val floor = floors[ticket.getFloorNumberForTicket()]?: throw FloorDoesNotExistException()
+        if (floor.clearSpot(ticket.getSpotNumberForTicket())) {
+            vehicle.clearTicket()
+            return receiptBooth.getReceipt(ticket, exitTime)
         }
         return null
     }

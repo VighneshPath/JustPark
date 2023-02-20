@@ -1,6 +1,7 @@
 package models
 
 import java.time.LocalDateTime
+import kotlin.math.floor
 
 data class Ticket(
     private val ticketNumber: Long,
@@ -14,5 +15,9 @@ data class Ticket(
 
     fun getSpotNumberForTicket(): Long {
         return spotNumber
+    }
+
+    fun getFloorNumberForTicket(): Long{
+        return floorNumber
     }
 }
