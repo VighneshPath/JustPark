@@ -14,9 +14,8 @@ class ParkingLot(override val ticketBooth: TicketBooth,
         if (spot != null) {
             spotTracker.setSpotTo(spot.getSpotsNumber(), vehicle)
             val ticket = ticketBooth.getTicket(spot.getSpotsNumber(), entryTime)
-            if (vehicle.setTicketTo(ticket)) {
-                return ticket
-            }
+            vehicle.setTicketTo(ticket)
+            return ticket
         }
         return null
     }
@@ -24,6 +23,7 @@ class ParkingLot(override val ticketBooth: TicketBooth,
     override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt? {
         val ticket = vehicle.getVehicleTicket() ?: throw TicketDoesNotExistException()
         if (spotTracker.clearSpot(ticket.getSpotNumberForTicket())) {
+            vehicle.clearTicket()
             return receiptBooth.getReceipt(ticket, exitTime)
         }
         return null
