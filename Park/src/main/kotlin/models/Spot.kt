@@ -1,6 +1,6 @@
-package main.models
+package models
 
-import main.models.vehicles.Vehicle
+import models.vehicles.Vehicle
 
 data class Spot(private var spotNumber: Long){
     private var vehicle: Vehicle? = null

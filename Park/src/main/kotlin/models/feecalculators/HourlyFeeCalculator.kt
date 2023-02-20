@@ -1,4 +1,4 @@
-package main.models.feecalculators
+package models.feecalculators
 
 class HourlyFeeCalculator: FeeCalculator {
     override fun calculateFee(duration: Long, fare: Long): Long {

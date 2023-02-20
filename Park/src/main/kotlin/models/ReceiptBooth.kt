@@ -1,8 +1,8 @@
-package main.models
+package models
 
 import main.exceptions.InvalidExitTimeException
-import main.models.feecalculators.FeeCalculator
-import main.models.feemodels.FeeModel
+import models.feecalculators.FeeCalculator
+import models.feemodels.FeeModel
 import java.time.Duration
 import java.time.LocalDateTime
 

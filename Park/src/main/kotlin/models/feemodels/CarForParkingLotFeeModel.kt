@@ -1,4 +1,4 @@
-package main.models.feemodels
+package models.feemodels
 
 import main.constants.CAR_PARKING_LOT_FEE_PER_HOUR
 

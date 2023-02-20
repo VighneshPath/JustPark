@@ -1,7 +1,7 @@
-package main.models.locations
+package models.locations
 
-import main.models.*
-import main.models.vehicles.Vehicle
+import models.vehicles.Vehicle
+import models.*
 import java.time.LocalDateTime
 
 interface Location {

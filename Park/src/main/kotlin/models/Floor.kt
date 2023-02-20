@@ -1,17 +1,20 @@
-package main.models
+package models
 
 import main.constants.VEHICLE_SPOT_LIMIT
 import main.exceptions.SpotDoesNotExistException
-import main.models.vehicles.Vehicle
+import models.vehicles.Vehicle
 
-class Floor(private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
+class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
     private var spots: MutableMap<Long, Spot> = mutableMapOf()
-
     init {
         for (spot in 0..totalSpots) {
             spots[spot] = Spot(spot)
         }
     }
+
+    fun getFloorNumber() = floorNumber
+
+    fun isFull() = getNextAvailableSpot()==null
 
     fun getNextAvailableSpot(): Spot? {
         for (spot in 1..totalSpots) {
