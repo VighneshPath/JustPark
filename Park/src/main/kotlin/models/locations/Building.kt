@@ -54,15 +54,26 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
         return parkVehicleAndGetTicket(floor, spot, vehicle, entryTime)
     }
 
-    override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
-        val ticket = receiptBooth.validateTicket(vehicle.getVehicleTicket())
-        if(ticket.getFloorNumberForTicket() >= floors.size) throw FloorDoesNotExistException()
-        val floor = floors[ticket.getFloorNumberForTicket()]
-        if (floor.clearSpot(ticket.getSpotNumberForTicket())) {
+    private fun unparkVehicleAndGetReceipt(
+        ticket: Ticket,
+        floor: Floor,
+        spotNumber: Int,
+        vehicle: Vehicle,
+        exitTime: LocalDateTime
+    ): Receipt {
+        if (floor.clearSpot(spotNumber)) {
             vehicle.clearTicket()
             return receiptBooth.getReceipt(ticket, exitTime)
         }
-
         return NullReceipt()
+    }
+
+    override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
+        val ticket = receiptBooth.validateTicket(vehicle.getVehicleTicket())
+        if (ticket.getFloorNumberForTicket() >= floors.size) throw FloorDoesNotExistException()
+        val floor = floors[ticket.getFloorNumberForTicket()]
+        val spotNumber = ticket.getSpotNumberForTicket()
+
+        return unparkVehicleAndGetReceipt(ticket, floor, spotNumber, vehicle, exitTime)
     }
 }
