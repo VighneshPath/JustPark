@@ -1,6 +1,8 @@
 package models
 
 import exceptions.InvalidExitTimeException
+import exceptions.InvalidTicketException
+import exceptions.TicketDoesNotExistException
 import models.feecalculators.FeeCalculator
 import models.feemodels.FeeModel
 import models.receipts.NormalReceipt
@@ -11,6 +13,16 @@ import java.time.LocalDateTime
 
 class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeModel: FeeModel) {
     private var receiptCounter: Long = 0
+    fun validateTicket(ticket: Ticket?): Ticket{
+        ticket?:throw TicketDoesNotExistException()
+        if (ticket.getSpotNumberForTicket() <= 0 ||
+            ticket.getFloorNumberForTicket() <= 0
+        ) {
+            throw InvalidTicketException()
+        }
+        return ticket
+    }
+
     fun getReceipt(ticket: Ticket, exitTime: LocalDateTime): Receipt {
         if(exitTime.isBefore(ticket.getTicketEntryDateTime())) throw InvalidExitTimeException()
 

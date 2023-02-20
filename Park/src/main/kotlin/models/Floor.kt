@@ -12,10 +12,6 @@ class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICL
         }
     }
 
-    fun getVehicleFor(spotNumber: Long): Vehicle?{
-        return spots[spotNumber]!!.getSpotVehicle()
-    }
-
     fun getFloorNumber() = floorNumber
 
     fun isFull() = getNextAvailableSpot()==null

@@ -44,6 +44,20 @@ class FloorTest{
         val unknownSpot = -1L
         val car = Car()
         val expectedErrorMessage = "Given spot does not exist"
+
         assertThrows<SpotDoesNotExistException>(expectedErrorMessage){floor.setSpotTo(unknownSpot, car)}
+    }
+
+    @DisplayName("should return false if vehicle is already parked in spot")
+    @Test
+    fun setSpotWithVehicleAlreadyPresent(){
+        val someSpot = 1L
+        val car = Car()
+        floor.setSpotTo(someSpot, car)
+        val expectedValue = false
+
+        val actualValue = floor.setSpotTo(someSpot, car)
+
+        assertEquals(expectedValue, actualValue)
     }
 }

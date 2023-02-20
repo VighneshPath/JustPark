@@ -1,5 +1,7 @@
 package models.locations
 
+import exceptions.FloorDoesNotExistException
+import exceptions.InvalidTicketException
 import models.receipts.Receipt
 import models.ReceiptBooth
 import models.tickets.NormalTicket
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -148,4 +151,31 @@ class BuildingTest{
 
         assertEquals(true, actualReceipt.isNull())
     }
+
+    @DisplayName("should throw an invalid ticket exception")
+    @Test
+    fun getInvalidTicket(){
+        val car = Car()
+        val floorsWithSize = listOf(-1L)
+        val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+        car.setTicketTo(NormalTicket(1L, -1L, -1L, LocalDateTime.now()))
+
+        val expectedErrorMessage = "Invalid ticket"
+        assertThrows<InvalidTicketException>(expectedErrorMessage){building.unparkVehicle(car, LocalDateTime.now())}
+    }
+
+    @DisplayName("should throw an invalid floor exception")
+    @Test
+    fun getInvalidFloor(){
+        val car = Car()
+        val floorsWithSize = listOf(3L)
+        val entryTime = LocalDateTime.now()
+        val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+        building.parkVehicle(car, entryTime)
+        car.setTicketTo(NormalTicket(1L, 2L, 1L, entryTime))
+
+        val expectedErrorMessage = "Floor does not exist"
+        assertThrows<FloorDoesNotExistException>(expectedErrorMessage){building.unparkVehicle(car, LocalDateTime.now())}
+    }
+
 }

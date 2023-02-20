@@ -4,9 +4,6 @@ import models.vehicles.Vehicle
 
 data class Spot(private var spotNumber: Long){
     private var vehicle: Vehicle? = null
-    fun getSpotVehicle(): Vehicle?{
-        return vehicle
-    }
     fun getSpotsNumber(): Long{
         return spotNumber
     }
