@@ -19,9 +19,9 @@ class FloorTest{
     fun getFirstAvailableSpot(){
         val expectedSpot = Spot(1L)
 
-        val actualSpot = floor.getNextAvailableSpot()
+        val actualSpot = floor.getNextAvailableSpot()!!
 
-        assertEquals(expectedSpot, actualSpot)
+        assertEquals(expectedSpot.getSpotsNumber(), actualSpot.getSpotsNumber())
     }
 
     @DisplayName("should fill up all spots and then give null")

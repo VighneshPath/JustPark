@@ -2,7 +2,7 @@ package models
 
 import models.vehicles.Vehicle
 
-data class Spot(private var spotNumber: Long){
+class Spot(private var spotNumber: Long){
     private var vehicle: Vehicle? = null
     fun getSpotsNumber(): Long{
         return spotNumber

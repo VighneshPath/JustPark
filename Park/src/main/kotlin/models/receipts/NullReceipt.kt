@@ -4,5 +4,4 @@ class NullReceipt: Receipt {
     override fun isNull(): Boolean {
         return true
     }
-
 }

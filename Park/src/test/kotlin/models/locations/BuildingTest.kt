@@ -2,6 +2,7 @@ package models.locations
 
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
+import exceptions.TicketDoesNotExistException
 import models.receipts.Receipt
 import models.ReceiptBooth
 import models.tickets.NormalTicket
@@ -176,6 +177,18 @@ class BuildingTest{
 
         val expectedErrorMessage = "Floor does not exist"
         assertThrows<FloorDoesNotExistException>(expectedErrorMessage){building.unparkVehicle(car, LocalDateTime.now())}
+    }
+
+    @DisplayName("should throw ticket does not exist exception")
+    @Test
+    fun getTicketDoesNotExist(){
+        val car = Car()
+        val floorsWithSize = listOf(3L)
+        val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+        val exitTime = LocalDateTime.now()
+
+        val expectedErrorMessage = "Ticket does not exist"
+        assertThrows<TicketDoesNotExistException>(expectedErrorMessage){building.unparkVehicle(car, exitTime)}
     }
 
 }
