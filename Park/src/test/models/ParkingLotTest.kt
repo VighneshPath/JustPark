@@ -1,5 +1,6 @@
 package test.models
 
+import main.exceptions.TicketDoesNotExistException
 import main.models.*
 import main.models.feecalculators.FeeCalculator
 import main.models.feecalculators.HourlyFeeCalculator
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.time.Duration
 import java.time.LocalDateTime
 
@@ -147,5 +149,15 @@ class ParkingLotTest{
         val actualReceipt = parkingLot.unparkVehicle(car1, exitTime)
 
         assertEquals(expectedReceipt, actualReceipt)
+    }
+
+    @DisplayName("should throw an error if a vehicle without a ticket tries to unpark")
+    @Test
+    fun unparkVehicleWithoutTicket(){
+        val car = Car()
+        val exitTime = LocalDateTime.now()
+        val errorMessage = "Ticket does not exist"
+
+        assertThrows<TicketDoesNotExistException>(errorMessage){parkingLot.unparkVehicle(car, exitTime)}
     }
 }
