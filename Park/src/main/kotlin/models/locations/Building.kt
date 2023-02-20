@@ -1,8 +1,6 @@
 package models.locations
 
 import exceptions.FloorDoesNotExistException
-import exceptions.InvalidTicketException
-import exceptions.TicketDoesNotExistException
 import models.Floor
 import models.ReceiptBooth
 import models.Spot

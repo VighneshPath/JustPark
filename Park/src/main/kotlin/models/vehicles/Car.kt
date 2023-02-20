@@ -3,7 +3,6 @@ package models.vehicles
 import models.tickets.Ticket
 import models.VehicleType
 import models.VehicleType.CAR
-import models.vehicles.Vehicle
 
 class Car : Vehicle {
     override val type: VehicleType = CAR
