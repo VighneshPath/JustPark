@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.parking.entity.ParkingFloorTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-02-20T11:18:36" hostname="Vigneshs-MacBook-Pro.local" time="0.003">
+  <properties/>
+  <testcase name="Should return null if no parking spots are available()" classname="com.parking.entity.ParkingFloorTest" time="0.0"/>
+  <testcase name="Should create parking floor with given number of parking spots()" classname="com.parking.entity.ParkingFloorTest" time="0.0"/>
+  <testcase name="Should return the available parking spot()" classname="com.parking.entity.ParkingFloorTest" time="0.0"/>
+  <testcase name="Should occupy next parking spot if current sparking spot is not free()" classname="com.parking.entity.ParkingFloorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

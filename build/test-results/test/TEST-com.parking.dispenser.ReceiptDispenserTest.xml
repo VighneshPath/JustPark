@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.parking.dispenser.ReceiptDispenserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-02-20T11:18:36" hostname="Vigneshs-MacBook-Pro.local" time="0.018">
+  <properties/>
+  <testcase name="dispense receipt with id 1()" classname="com.parking.dispenser.ReceiptDispenserTest" time="0.016"/>
+  <testcase name="Should increment id with every dispense of receipt()" classname="com.parking.dispenser.ReceiptDispenserTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -13,13 +13,13 @@ class FloorTest {
 
     @BeforeEach
     fun setUp() {
-        floor = Floor(100L)
+        floor = Floor(100)
     }
 
     @DisplayName("should get 1st spot")
     @Test
     fun getFirstAvailableSpot() {
-        val expectedSpot = Spot(1L)
+        val expectedSpot = Spot(1)
 
         val actualSpot = floor.getNextAvailableSpot()!!
 
@@ -30,7 +30,7 @@ class FloorTest {
     @Test
     fun fillUpSpots() {
         val car = Car()
-        for (index in 1..100L) {
+        for (index in 1..100) {
             floor.setSpotTo(index, car)
         }
         val expectedSpot: Spot? = null
@@ -43,7 +43,7 @@ class FloorTest {
     @DisplayName("should throw exception if setting to invalid spot")
     @Test
     fun setSpotToVehicleWithError() {
-        val unknownSpot = -1L
+        val unknownSpot = -1
         val car = Car()
         val expectedErrorMessage = "Given spot does not exist"
 
@@ -53,7 +53,7 @@ class FloorTest {
     @DisplayName("should return false if vehicle is already parked in spot")
     @Test
     fun setSpotWithVehicleAlreadyPresent() {
-        val someSpot = 1L
+        val someSpot = 1
         val car = Car()
         floor.setSpotTo(someSpot, car)
         val expectedValue = false

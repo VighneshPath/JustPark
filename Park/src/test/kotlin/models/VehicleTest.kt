@@ -21,7 +21,7 @@ class VehicleTest {
     @Test
     fun setVehicleTicket() {
         val entryTime = LocalDateTime.now()
-        val ticket = NormalTicket(1L, 1L, 1L, entryTime)
+        val ticket = NormalTicket(1L, 1, 1, entryTime)
 
         vehicle.setTicketTo(ticket)
 

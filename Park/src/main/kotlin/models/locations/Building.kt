@@ -12,20 +12,20 @@ import models.tickets.Ticket
 import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
-class Building(private val ticketBooth: TicketBooth, private val receiptBooth: ReceiptBooth, floorSizes: List<Long>) :
+class Building(private val ticketBooth: TicketBooth, private val receiptBooth: ReceiptBooth, floorSizes: List<Int>) :
     Location {
-    private var floors: MutableMap<Long, Floor> = mutableMapOf()
+    private var floors: MutableList<Floor> = mutableListOf()
 
     init {
-        floors[0] = Floor(0L, 0L)
+        floors.add(Floor(0, 0))
         for (index in 1..floorSizes.size) {
-            floors[index.toLong()] = Floor(index.toLong(), floorSizes[index - 1])
+            floors.add(Floor(index, floorSizes[index - 1]))
         }
     }
 
     private fun getNextAvailableFloor(): Floor? {
-        for (index in 1L until floors.size) {
-            if (!floors[index]!!.isFull()) return floors[index]
+        for (index in 1 until floors.size) {
+            if (!floors[index].isFull()) return floors[index]
         }
 
         return null
@@ -56,7 +56,8 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
 
     override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
         val ticket = receiptBooth.validateTicket(vehicle.getVehicleTicket())
-        val floor = floors[ticket.getFloorNumberForTicket()] ?: throw FloorDoesNotExistException()
+        if(ticket.getFloorNumberForTicket() >= floors.size) throw FloorDoesNotExistException()
+        val floor = floors[ticket.getFloorNumberForTicket()]
         if (floor.clearSpot(ticket.getSpotNumberForTicket())) {
             vehicle.clearTicket()
             return receiptBooth.getReceipt(ticket, exitTime)

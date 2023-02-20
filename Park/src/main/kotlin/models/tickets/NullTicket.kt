@@ -7,11 +7,11 @@ class NullTicket : Ticket {
         return LocalDateTime.MIN
     }
 
-    override fun getSpotNumberForTicket(): Long {
+    override fun getSpotNumberForTicket(): Int {
         return -1
     }
 
-    override fun getFloorNumberForTicket(): Long {
+    override fun getFloorNumberForTicket(): Int {
         return -1
     }
 

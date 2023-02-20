@@ -4,12 +4,12 @@ import constants.VEHICLE_SPOT_LIMIT
 import exceptions.SpotDoesNotExistException
 import models.vehicles.Vehicle
 
-class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
-    private var spots: MutableMap<Long, Spot> = mutableMapOf()
+class Floor(private val floorNumber: Int, private val totalSpots: Int = VEHICLE_SPOT_LIMIT) {
+    private var spots: MutableList<Spot> = mutableListOf()
 
     init {
         for (spot in 0..totalSpots) {
-            spots[spot] = Spot(spot)
+            spots.add(Spot(spot))
         }
     }
 
@@ -19,29 +19,29 @@ class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICL
 
     fun getNextAvailableSpot(): Spot? {
         for (spot in 1..totalSpots) {
-            if (!spots[spot]!!.isSpotTaken()) return spots[spot]
+            if (!spots[spot].isSpotTaken()) return spots[spot]
         }
         return null
     }
 
-    private fun isSpotTaken(spotNumber: Long): Boolean {
+    private fun isSpotTaken(spotNumber: Int): Boolean {
         if (spotNumber >= spots.size || spotNumber <= 0) {
             throw SpotDoesNotExistException()
         }
-        return spots[spotNumber]!!.isSpotTaken()
+        return spots[spotNumber].isSpotTaken()
     }
 
-    fun setSpotTo(spotNumber: Long, vehicle: Vehicle): Boolean {
+    fun setSpotTo(spotNumber: Int, vehicle: Vehicle): Boolean {
         if (!isSpotTaken(spotNumber)) {
-            if (spots[spotNumber]!!.reserveSpot(vehicle)) {
+            if (spots[spotNumber].reserveSpot(vehicle)) {
                 return true
             }
         }
         return false
     }
 
-    fun clearSpot(spotNumber: Long): Boolean {
-        if (spots[spotNumber]!!.unreserveSpot()) {
+    fun clearSpot(spotNumber: Int): Boolean {
+        if (spots[spotNumber].unreserveSpot()) {
             return true
         }
         return false

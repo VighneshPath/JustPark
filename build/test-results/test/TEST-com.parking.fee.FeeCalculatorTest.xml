@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.parking.fee.FeeCalculatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-02-20T11:18:36" hostname="Vigneshs-MacBook-Pro.local" time="0.012">
+  <properties/>
+  <testcase name="1 =&gt; entryTime=Mon Dec 03 15:45:30 IST 2007, exitTime=Mon Dec 03 20:45:31 IST 2007, expectedFee=60" classname="com.parking.fee.FeeCalculatorTest" time="0.008"/>
+  <testcase name="2 =&gt; entryTime=Mon Dec 03 15:45:30 IST 2007, exitTime=Mon Dec 03 20:45:30 IST 2007, expectedFee=50" classname="com.parking.fee.FeeCalculatorTest" time="0.0"/>
+  <testcase name="3 =&gt; entryTime=Mon Dec 03 15:45:30 IST 2007, exitTime=Mon Dec 03 15:45:31 IST 2007, expectedFee=10" classname="com.parking.fee.FeeCalculatorTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

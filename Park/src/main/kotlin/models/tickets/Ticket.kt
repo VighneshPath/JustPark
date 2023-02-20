@@ -5,9 +5,9 @@ import java.time.LocalDateTime
 interface Ticket {
     fun getTicketEntryDateTime(): LocalDateTime
 
-    fun getSpotNumberForTicket(): Long
+    fun getSpotNumberForTicket(): Int
 
-    fun getFloorNumberForTicket(): Long
+    fun getFloorNumberForTicket(): Int
 
     fun isNull(): Boolean
 }

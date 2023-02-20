@@ -11,7 +11,7 @@ class SpotTest {
 
     @BeforeEach
     fun setUp() {
-        spot = Spot(1L)
+        spot = Spot(1)
     }
 
     @DisplayName("reserve a spot")
@@ -23,7 +23,7 @@ class SpotTest {
         spot.reserveSpot(car)
 
         assertEquals(expectedSpotStatus, spot.isSpotTaken())
-        assertEquals(1L, spot.getSpotsNumber())
+        assertEquals(1, spot.getSpotsNumber())
     }
 
     @DisplayName("unreserve a spot")
@@ -36,6 +36,6 @@ class SpotTest {
         spot.unreserveSpot()
 
         assertEquals(expectedSpotStatus, spot.isSpotTaken())
-        assertEquals(1L, spot.getSpotsNumber())
+        assertEquals(1, spot.getSpotsNumber())
     }
 }
