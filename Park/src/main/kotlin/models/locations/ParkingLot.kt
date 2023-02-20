@@ -13,7 +13,7 @@ class ParkingLot(override val ticketBooth: TicketBooth,
         val spot = floor.getNextAvailableSpot()
         if (spot != null) {
             floor.setSpotTo(spot.getSpotsNumber(), vehicle)
-            val ticket = ticketBooth.getTicket(spot.getSpotsNumber(), entryTime)
+            val ticket = ticketBooth.getTicket(spot.getSpotsNumber(), 1L, entryTime)
             vehicle.setTicketTo(ticket)
             return ticket
         }

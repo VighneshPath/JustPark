@@ -1,7 +1,6 @@
 package models.locations
 
 import main.exceptions.TicketDoesNotExistException
-import main.models.*
 import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
@@ -39,7 +38,7 @@ class ParkingLotTest{
     fun parkAVehicle(){
         val car = Car()
         val entryTime = LocalDateTime.now()
-        val expectedTicket = Ticket(1L, 1L, entryTime)
+        val expectedTicket = Ticket(1L, 1L,1L, entryTime)
 
         val actualTicket = parkingLot.parkVehicle(car, entryTime)
 
@@ -73,8 +72,8 @@ class ParkingLotTest{
         val car1 = Car()
         val car2 = Car()
         val entryTime = LocalDateTime.now()
-        val expectedTicket1 = Ticket(1L, 1L, entryTime)
-        val expectedTicket2 = Ticket(2L, 2L, entryTime)
+        val expectedTicket1 = Ticket(1L, 1L,1L, entryTime)
+        val expectedTicket2 = Ticket(2L, 1L,2L, entryTime)
 
         val actualTicket1 = parkingLot.parkVehicle(car1, entryTime)
         val actualTicket2 = parkingLot.parkVehicle(car2, entryTime)
@@ -123,7 +122,7 @@ class ParkingLotTest{
         parkingLot.parkVehicle(car1, entryTime1)
         parkingLot.unparkVehicle(car1, LocalDateTime.now())
         val entryTime2 = LocalDateTime.now()
-        val expectedTicket = Ticket(2L, 1L, entryTime2)
+        val expectedTicket = Ticket(2L, 1L, 1L,entryTime2)
 
         val actualTicket = parkingLot.parkVehicle(car2, entryTime2)
 

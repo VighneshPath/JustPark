@@ -1,26 +1,43 @@
 package models.locations
 
 import models.ReceiptBooth
+import models.Ticket
 import models.TicketBooth
+import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
+import models.feemodels.FeeModel
+import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.time.LocalDateTime
 
 class BuildingTest{
-    @DisplayName("should create a building with one floor")
+    private lateinit var feeCalculator: FeeCalculator
+    private lateinit var feeModel: FeeModel
+    private lateinit var receiptBooth: ReceiptBooth
+    private lateinit var ticketBooth: TicketBooth
+    @BeforeEach
+    fun setUp(){
+        feeCalculator = HourlyFeeCalculator()
+        feeModel = CarForParkingLotFeeModel()
+        receiptBooth = ReceiptBooth(feeCalculator, feeModel)
+        ticketBooth = TicketBooth()
+    }
+
+    @DisplayName("should park a vehicle in the floor created")
     @Test
-    fun createBuildingWithOneFloor(){
-        val feeCalculator = HourlyFeeCalculator()
-        val feeModel = CarForParkingLotFeeModel()
-        val receiptBooth = ReceiptBooth(feeCalculator, feeModel)
-        val ticketBooth = TicketBooth()
+    fun parkVehicleInFirstFloor(){
         val floorsWithSize = listOf(10L)
+        val car = Car()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+        val entryTime = LocalDateTime.now()
+        val expectedTicket = Ticket(1L, 1L, 1L, entryTime)
 
-        val floor = building.getNextAvailableFloor()!!
+        val actualTicket = building.parkVehicle(car, entryTime)
 
-        assertEquals(1, floor.getFloorNumber())
+        assertEquals(expectedTicket, actualTicket)
     }
 }

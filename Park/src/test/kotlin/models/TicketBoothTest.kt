@@ -17,9 +17,9 @@ class TicketBoothTest{
     fun getTicketForSpotAndEntry(){
         val entryTime = LocalDateTime.now()
         val spotNumber = 1L
-        val expectedTicket = Ticket(1L, spotNumber, entryTime)
+        val expectedTicket = Ticket(1L, 1L, spotNumber, entryTime)
 
-        val actualTicket = ticketBooth.getTicket(spotNumber, entryTime)
+        val actualTicket = ticketBooth.getTicket(1L, spotNumber, entryTime)
 
         assertEquals(expectedTicket, actualTicket)
     }

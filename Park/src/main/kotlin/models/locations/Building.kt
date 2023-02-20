@@ -1,9 +1,9 @@
 package models.locations
 
-import models.Floor
-import models.ReceiptBooth
-import models.Spot
-import models.TicketBooth
+import models.*
+import models.vehicles.Car
+import models.vehicles.Vehicle
+import java.time.LocalDateTime
 
 class Building(val ticketBooth: TicketBooth, val receiptBooth: ReceiptBooth, private val floorSizes: List<Long>) {
     private var floors: MutableMap<Long, Floor> = mutableMapOf()
@@ -15,7 +15,24 @@ class Building(val ticketBooth: TicketBooth, val receiptBooth: ReceiptBooth, pri
         }
     }
 
-    fun getNextAvailableFloor(): Floor? {
+    private fun getNextAvailableFloor(): Floor? {
         return floors[1]
+    }
+
+    fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket? {
+        val floor = getNextAvailableFloor()
+        if (floor != null) {
+            val spot = floor.getNextAvailableSpot()
+            if(spot != null){
+                floor.setSpotTo(spot.getSpotsNumber(), vehicle)
+                val ticket = ticketBooth.getTicket(spot.getSpotsNumber(),
+                    floor.getFloorNumber(),
+                    entryTime
+                )
+                vehicle.setTicketTo(ticket)
+                return ticket
+            }
+        }
+        return null
     }
 }
