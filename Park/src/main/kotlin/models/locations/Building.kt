@@ -1,10 +1,7 @@
 package models.locations
 
 import exceptions.FloorDoesNotExistException
-import models.Floor
-import models.ReceiptBooth
-import models.Spot
-import models.TicketBooth
+import models.*
 import models.receipts.NullReceipt
 import models.receipts.Receipt
 import models.tickets.NullTicket
@@ -12,26 +9,10 @@ import models.tickets.Ticket
 import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
-class Building(private val ticketBooth: TicketBooth, private val receiptBooth: ReceiptBooth, floorSizes: List<Int>) :
+class Building(private val ticketBooth: TicketBooth, private val receiptBooth: ReceiptBooth, private val floorTracker: FloorTracker) :
     Location {
-    private var floors: MutableList<Floor> = mutableListOf()
 
-    init {
-        floors.add(Floor(0, 0))
-        for (index in 1..floorSizes.size) {
-            floors.add(Floor(index, floorSizes[index - 1]))
-        }
-    }
-
-    private fun getNextAvailableFloor(): Floor? {
-        for (index in 1 until floors.size) {
-            if (!floors[index].isFull()) return floors[index]
-        }
-
-        return null
-    }
-
-    private fun parkVehicleAndGetTicket(
+    private fun setSpotAndGetTicket(
         floor: Floor,
         spot: Spot,
         vehicle: Vehicle,
@@ -48,13 +29,13 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
     }
 
     override fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket {
-        val floor = getNextAvailableFloor() ?: return NullTicket()
+        val floor = floorTracker.getNextAvailableFloor() ?: return NullTicket()
         val spot = floor.getNextAvailableSpot() ?: return NullTicket()
 
-        return parkVehicleAndGetTicket(floor, spot, vehicle, entryTime)
+        return setSpotAndGetTicket(floor, spot, vehicle, entryTime)
     }
 
-    private fun unparkVehicleAndGetReceipt(
+    private fun clearSpotAndGetReceipt(
         ticket: Ticket,
         floor: Floor,
         spotNumber: Int,
@@ -70,10 +51,10 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
 
     override fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
         val ticket = receiptBooth.validateTicket(vehicle.getVehicleTicket())
-        if (ticket.getFloorNumberForTicket() >= floors.size) throw FloorDoesNotExistException()
-        val floor = floors[ticket.getFloorNumberForTicket()]
+        if (ticket.getFloorNumberForTicket() >= floorTracker.getSize()) throw FloorDoesNotExistException()
+        val floor = floorTracker.getFloor(ticket.getFloorNumberForTicket())
         val spotNumber = ticket.getSpotNumberForTicket()
 
-        return unparkVehicleAndGetReceipt(ticket, floor, spotNumber, vehicle, exitTime)
+        return clearSpotAndGetReceipt(ticket, floor, spotNumber, vehicle, exitTime)
     }
 }
