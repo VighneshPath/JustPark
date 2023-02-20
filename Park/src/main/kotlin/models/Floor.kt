@@ -6,6 +6,7 @@ import models.vehicles.Vehicle
 
 class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICLE_SPOT_LIMIT) {
     private var spots: MutableMap<Long, Spot> = mutableMapOf()
+
     init {
         for (spot in 0..totalSpots) {
             spots[spot] = Spot(spot)
@@ -14,7 +15,7 @@ class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICL
 
     fun getFloorNumber() = floorNumber
 
-    fun isFull() = getNextAvailableSpot()==null
+    fun isFull() = getNextAvailableSpot() == null
 
     fun getNextAvailableSpot(): Spot? {
         for (spot in 1..totalSpots) {
@@ -30,8 +31,8 @@ class Floor(private val floorNumber: Long, private val totalSpots: Long = VEHICL
         return spots[spotNumber]!!.isSpotTaken()
     }
 
-    fun setSpotTo(spotNumber: Long, vehicle: Vehicle): Boolean{
-        if(!isSpotTaken(spotNumber)) {
+    fun setSpotTo(spotNumber: Long, vehicle: Vehicle): Boolean {
+        if (!isSpotTaken(spotNumber)) {
             if (spots[spotNumber]!!.reserveSpot(vehicle)) {
                 return true
             }

@@ -4,13 +4,13 @@ import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
 import models.ReceiptBooth
-import models.tickets.NormalTicket
 import models.TicketBooth
 import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
 import models.feemodels.FeeModel
 import models.receipts.NormalReceipt
+import models.tickets.NormalTicket
 import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -20,13 +20,14 @@ import org.junit.jupiter.api.assertThrows
 import java.time.Duration
 import java.time.LocalDateTime
 
-class BuildingTest{
+class BuildingTest {
     private lateinit var feeCalculator: FeeCalculator
     private lateinit var feeModel: FeeModel
     private lateinit var receiptBooth: ReceiptBooth
     private lateinit var ticketBooth: TicketBooth
+
     @BeforeEach
-    fun setUp(){
+    fun setUp() {
         feeCalculator = HourlyFeeCalculator()
         feeModel = CarForParkingLotFeeModel()
         receiptBooth = ReceiptBooth(feeCalculator, feeModel)
@@ -35,7 +36,7 @@ class BuildingTest{
 
     @DisplayName("should park a vehicle in the floor created")
     @Test
-    fun parkVehicleInFirstFloor(){
+    fun parkVehicleInFirstFloor() {
         val floorsWithSize = listOf(10L)
         val car = Car()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
@@ -49,7 +50,7 @@ class BuildingTest{
 
     @DisplayName("should park a vehicle in the available floor")
     @Test
-    fun parkVehicleInAvailableFloor(){
+    fun parkVehicleInAvailableFloor() {
         val floorsWithSize = listOf(1L, 1L)
         val car1 = Car()
         val car2 = Car()
@@ -65,7 +66,7 @@ class BuildingTest{
 
     @DisplayName("should unpark a vehicle in the 1st floor")
     @Test
-    fun unparkInFirstFloor(){
+    fun unparkInFirstFloor() {
         val floorsWithSize = listOf(1L)
         val car1 = Car()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
@@ -84,8 +85,8 @@ class BuildingTest{
 
     @DisplayName("should give the 1st unparked vehicles spot to a new vehicle")
     @Test
-    fun reuseSpotForPark(){
-        val floorsWithSize=listOf(1L)
+    fun reuseSpotForPark() {
+        val floorsWithSize = listOf(1L)
         val car1 = Car()
         val car2 = Car()
         val entryTime1 = LocalDateTime.now()
@@ -93,7 +94,7 @@ class BuildingTest{
         building.parkVehicle(car1, entryTime1)
         building.unparkVehicle(car1, LocalDateTime.now())
         val entryTime2 = LocalDateTime.now()
-        val expectedTicket = NormalTicket(2L, 1L, 1L,entryTime2)
+        val expectedTicket = NormalTicket(2L, 1L, 1L, entryTime2)
 
         val actualTicket = building.parkVehicle(car2, entryTime2)
 
@@ -104,7 +105,7 @@ class BuildingTest{
     @Test
     fun parkForMultipleHours() {
         val car1 = Car()
-        val floorsWithSize=listOf(1L)
+        val floorsWithSize = listOf(1L)
         val entryTime = LocalDateTime.now().minusDays(2)
         val exitTime = LocalDateTime.now()
         val duration = Duration.between(entryTime, exitTime).toHours()
@@ -128,7 +129,7 @@ class BuildingTest{
     @Test
     fun getANullTicket() {
         val car1 = Car()
-        val floorsWithSize=listOf(0L)
+        val floorsWithSize = listOf(0L)
         val entryTime = LocalDateTime.now()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
 
@@ -141,7 +142,7 @@ class BuildingTest{
     @Test
     fun getANullReceipt() {
         val car1 = Car()
-        val floorsWithSize=listOf(1L)
+        val floorsWithSize = listOf(1L)
         val entryTime = LocalDateTime.now()
         val exitTime = LocalDateTime.now()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
@@ -154,19 +155,19 @@ class BuildingTest{
 
     @DisplayName("should throw an invalid ticket exception")
     @Test
-    fun getInvalidTicket(){
+    fun getInvalidTicket() {
         val car = Car()
         val floorsWithSize = listOf(-1L)
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
         car.setTicketTo(NormalTicket(1L, -1L, -1L, LocalDateTime.now()))
 
         val expectedErrorMessage = "Invalid ticket"
-        assertThrows<InvalidTicketException>(expectedErrorMessage){building.unparkVehicle(car, LocalDateTime.now())}
+        assertThrows<InvalidTicketException>(expectedErrorMessage) { building.unparkVehicle(car, LocalDateTime.now()) }
     }
 
     @DisplayName("should throw an invalid floor exception")
     @Test
-    fun getInvalidFloor(){
+    fun getInvalidFloor() {
         val car = Car()
         val floorsWithSize = listOf(3L)
         val entryTime = LocalDateTime.now()
@@ -175,19 +176,24 @@ class BuildingTest{
         car.setTicketTo(NormalTicket(1L, 2L, 1L, entryTime))
 
         val expectedErrorMessage = "Floor does not exist"
-        assertThrows<FloorDoesNotExistException>(expectedErrorMessage){building.unparkVehicle(car, LocalDateTime.now())}
+        assertThrows<FloorDoesNotExistException>(expectedErrorMessage) {
+            building.unparkVehicle(
+                car,
+                LocalDateTime.now()
+            )
+        }
     }
 
     @DisplayName("should throw ticket does not exist exception")
     @Test
-    fun getTicketDoesNotExist(){
+    fun getTicketDoesNotExist() {
         val car = Car()
         val floorsWithSize = listOf(3L)
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
         val exitTime = LocalDateTime.now()
 
         val expectedErrorMessage = "Ticket does not exist"
-        assertThrows<TicketDoesNotExistException>(expectedErrorMessage){building.unparkVehicle(car, exitTime)}
+        assertThrows<TicketDoesNotExistException>(expectedErrorMessage) { building.unparkVehicle(car, exitTime) }
     }
 
 }

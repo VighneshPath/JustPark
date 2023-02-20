@@ -7,7 +7,7 @@ data class NormalTicket(
     private val floorNumber: Long,
     private val spotNumber: Long,
     private val entryDateTime: LocalDateTime
-): Ticket {
+) : Ticket {
     override fun getTicketEntryDateTime(): LocalDateTime {
         return entryDateTime
     }
@@ -16,7 +16,7 @@ data class NormalTicket(
         return spotNumber
     }
 
-    override fun getFloorNumberForTicket(): Long{
+    override fun getFloorNumberForTicket(): Long {
         return floorNumber
     }
 

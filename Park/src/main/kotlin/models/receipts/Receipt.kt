@@ -1,5 +1,5 @@
 package models.receipts
 
-interface Receipt{
+interface Receipt {
     fun isNull(): Boolean
 }

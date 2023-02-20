@@ -1,9 +1,9 @@
 package models.vehicles
 
-import models.tickets.Ticket
 import models.VehicleType
+import models.tickets.Ticket
 
-interface Vehicle{
+interface Vehicle {
     val type: VehicleType
     var ticket: Ticket?
 

@@ -1,6 +1,6 @@
 package models.receipts
 
-class NullReceipt: Receipt {
+class NullReceipt : Receipt {
     override fun isNull(): Boolean {
         return true
     }

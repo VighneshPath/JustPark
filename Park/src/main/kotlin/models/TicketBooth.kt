@@ -9,7 +9,8 @@ class TicketBooth {
     fun getTicket(floorNumber: Long, spotNumber: Long, entryTime: LocalDateTime): Ticket {
         ticketCounter++
 
-        return NormalTicket(ticketCounter,
+        return NormalTicket(
+            ticketCounter,
             floorNumber,
             spotNumber,
             entryTime

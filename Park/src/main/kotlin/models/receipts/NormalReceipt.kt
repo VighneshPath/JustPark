@@ -9,7 +9,7 @@ data class NormalReceipt(
     val entryDateTime: LocalDateTime,
     val fee: Long,
     val exitDateTime: LocalDateTime
-): Receipt{
+) : Receipt {
     override fun isNull(): Boolean {
         return false
     }

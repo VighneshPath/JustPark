@@ -1,8 +1,8 @@
 package models.locations
 
-import models.vehicles.Vehicle
 import models.receipts.Receipt
 import models.tickets.Ticket
+import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
 interface Location {

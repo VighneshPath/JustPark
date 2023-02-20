@@ -13,8 +13,8 @@ import java.time.LocalDateTime
 
 class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeModel: FeeModel) {
     private var receiptCounter: Long = 0
-    fun validateTicket(ticket: Ticket?): Ticket{
-        ticket?:throw TicketDoesNotExistException()
+    fun validateTicket(ticket: Ticket?): Ticket {
+        ticket ?: throw TicketDoesNotExistException()
         if (ticket.getSpotNumberForTicket() <= 0 ||
             ticket.getFloorNumberForTicket() <= 0
         ) {
@@ -24,18 +24,19 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
     }
 
     fun getReceipt(ticket: Ticket, exitTime: LocalDateTime): Receipt {
-        if(exitTime.isBefore(ticket.getTicketEntryDateTime())) throw InvalidExitTimeException()
+        if (exitTime.isBefore(ticket.getTicketEntryDateTime())) throw InvalidExitTimeException()
 
         receiptCounter++
 
         val duration = Duration.between(ticket.getTicketEntryDateTime(), exitTime).toHours()
 
-        return NormalReceipt(receiptCounter,
+        return NormalReceipt(
+            receiptCounter,
             ticket.getFloorNumberForTicket(),
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
             feeCalculator.calculateFee(duration, feeModel.getRate()),
             exitTime
-            )
+        )
     }
 }

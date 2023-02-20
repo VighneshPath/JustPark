@@ -2,7 +2,7 @@ package models.tickets
 
 import java.time.LocalDateTime
 
-class NullTicket: Ticket {
+class NullTicket : Ticket {
     override fun getTicketEntryDateTime(): LocalDateTime {
         return LocalDateTime.MIN
     }
@@ -11,7 +11,7 @@ class NullTicket: Ticket {
         return -1
     }
 
-    override fun getFloorNumberForTicket(): Long{
+    override fun getFloorNumberForTicket(): Long {
         return -1
     }
 
