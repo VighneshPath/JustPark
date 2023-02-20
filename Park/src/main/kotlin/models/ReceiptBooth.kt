@@ -3,6 +3,7 @@ package models
 import exceptions.InvalidExitTimeException
 import models.feecalculators.FeeCalculator
 import models.feemodels.FeeModel
+import models.tickets.Ticket
 import java.time.Duration
 import java.time.LocalDateTime
 

@@ -1,23 +1,26 @@
-package models
+package models.tickets
 
 import java.time.LocalDateTime
-import kotlin.math.floor
 
-data class Ticket(
+data class NormalTicket(
     private val ticketNumber: Long,
     private val floorNumber: Long,
     private val spotNumber: Long,
     private val entryDateTime: LocalDateTime
-) {
-    fun getTicketEntryDateTime(): LocalDateTime {
+): Ticket {
+    override fun getTicketEntryDateTime(): LocalDateTime {
         return entryDateTime
     }
 
-    fun getSpotNumberForTicket(): Long {
+    override fun getSpotNumberForTicket(): Long {
         return spotNumber
     }
 
-    fun getFloorNumberForTicket(): Long{
+    override fun getFloorNumberForTicket(): Long{
         return floorNumber
+    }
+
+    override fun isNull(): Boolean {
+        return false
     }
 }

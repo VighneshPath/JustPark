@@ -2,7 +2,7 @@ package models.locations
 
 import models.Receipt
 import models.ReceiptBooth
-import models.Ticket
+import models.tickets.NormalTicket
 import models.TicketBooth
 import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
@@ -36,7 +36,7 @@ class BuildingTest{
         val car = Car()
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
         val entryTime = LocalDateTime.now()
-        val expectedTicket = Ticket(1L, 1L, 1L, entryTime)
+        val expectedTicket = NormalTicket(1L, 1L, 1L, entryTime)
 
         val actualTicket = building.parkVehicle(car, entryTime)
 
@@ -52,7 +52,7 @@ class BuildingTest{
         val building = Building(ticketBooth, receiptBooth, floorsWithSize)
         val entryTime = LocalDateTime.now()
         building.parkVehicle(car1, entryTime)
-        val expectedTicket = Ticket(2L, 2L, 1L, entryTime)
+        val expectedTicket = NormalTicket(2L, 2L, 1L, entryTime)
 
         val actualTicket = building.parkVehicle(car2, entryTime)
 
@@ -89,7 +89,7 @@ class BuildingTest{
         building.parkVehicle(car1, entryTime1)
         building.unparkVehicle(car1, LocalDateTime.now())
         val entryTime2 = LocalDateTime.now()
-        val expectedTicket = Ticket(2L, 1L, 1L,entryTime2)
+        val expectedTicket = NormalTicket(2L, 1L, 1L,entryTime2)
 
         val actualTicket = building.parkVehicle(car2, entryTime2)
 
@@ -118,5 +118,18 @@ class BuildingTest{
         val actualReceipt = building.unparkVehicle(car1, exitTime)
 
         assertEquals(expectedReceipt, actualReceipt)
+    }
+
+    @DisplayName("should get a null ticket")
+    @Test
+    fun getANullTicket() {
+        val car1 = Car()
+        val floorsWithSize=listOf(0L)
+        val entryTime = LocalDateTime.now()
+        val building = Building(ticketBooth, receiptBooth, floorsWithSize)
+
+        val actualTicket = building.parkVehicle(car1, entryTime)
+
+        assertEquals(true, actualTicket.isNull())
     }
 }

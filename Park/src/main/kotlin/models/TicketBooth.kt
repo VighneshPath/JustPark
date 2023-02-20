@@ -1,6 +1,7 @@
 package models
 
-import models.Ticket
+import models.tickets.NormalTicket
+import models.tickets.Ticket
 import java.time.LocalDateTime
 
 class TicketBooth {
@@ -8,7 +9,7 @@ class TicketBooth {
     fun getTicket(floorNumber: Long, spotNumber: Long, entryTime: LocalDateTime): Ticket {
         ticketCounter++
 
-        return Ticket(ticketCounter,
+        return NormalTicket(ticketCounter,
             floorNumber,
             spotNumber,
             entryTime

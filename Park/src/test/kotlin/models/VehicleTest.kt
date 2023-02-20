@@ -1,5 +1,7 @@
 package models
 
+import models.tickets.NormalTicket
+import models.tickets.Ticket
 import models.vehicles.Car
 import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -18,7 +20,7 @@ class VehicleTest{
     @Test
     fun setVehicleTicket(){
         val entryTime = LocalDateTime.now()
-        val ticket = Ticket(1L, 1L, 1L, entryTime)
+        val ticket = NormalTicket(1L, 1L, 1L, entryTime)
 
         vehicle.setTicketTo(ticket)
 

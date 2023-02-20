@@ -1,6 +1,6 @@
 package models.vehicles
 
-import models.Ticket
+import models.tickets.Ticket
 import models.VehicleType
 
 interface Vehicle{
