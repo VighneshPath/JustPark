@@ -9,4 +9,6 @@ interface Vehicle{
 
     fun getVehicleTicket(): Ticket?
     fun setTicketTo(ticket: Ticket): Boolean
+
+    fun clearTicket(): Boolean
 }
