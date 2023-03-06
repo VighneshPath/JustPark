@@ -11,13 +11,11 @@ class Car : Vehicle {
         return ticket
     }
 
-    override fun setTicketTo(ticket: Ticket): Boolean {
+    override fun setTicketTo(ticket: Ticket) {
         this.ticket = ticket
-        return true
     }
 
-    override fun clearTicket(): Boolean {
+    override fun clearTicket() {
         this.ticket = null
-        return true
     }
 }

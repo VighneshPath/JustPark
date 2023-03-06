@@ -24,26 +24,27 @@ class Floor(private val floorNumber: Int, private val totalSpots: Int = VEHICLE_
         return null
     }
 
-    private fun isSpotTaken(spotNumber: Int): Boolean {
+    private fun checkSpot(spotNumber: Int) {
         if (spotNumber >= spots.size || spotNumber <= 0) {
             throw SpotDoesNotExistException()
         }
+    }
+
+    private fun isSpotTaken(spotNumber: Int): Boolean {
+        checkSpot(spotNumber)
         return spots[spotNumber].isSpotTaken()
     }
 
     fun setSpotTo(spotNumber: Int, vehicle: Vehicle): Boolean {
         if (!isSpotTaken(spotNumber)) {
-            if (spots[spotNumber].reserveSpot(vehicle)) {
-                return true
-            }
+            spots[spotNumber].reserveSpot(vehicle)
+            return true
         }
         return false
     }
 
-    fun clearSpot(spotNumber: Int): Boolean {
-        if (spots[spotNumber].unreserveSpot()) {
-            return true
-        }
-        return false
+    fun clearSpot(spotNumber: Int) {
+        checkSpot(spotNumber)
+        spots[spotNumber].unreserveSpot()
     }
 }

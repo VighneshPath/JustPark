@@ -146,22 +146,6 @@ class BuildingTest {
         assertEquals(true, actualTicket.isNull())
     }
 
-    @DisplayName("should get a null receipt")
-    @Test
-    fun getANullReceipt() {
-        val car1 = Car()
-        val floorsWithSize = listOf(1)
-        floorTracker = FloorTracker(floorsWithSize)
-        val entryTime = LocalDateTime.now()
-        val exitTime = LocalDateTime.now()
-        val building = Building(ticketBooth, receiptBooth, floorTracker)
-
-        car1.setTicketTo(NormalTicket(1L, 1, 1, entryTime))
-        val actualReceipt = building.unparkVehicle(car1, exitTime)
-
-        assertEquals(true, actualReceipt.isNull())
-    }
-
     @DisplayName("should throw an invalid ticket exception")
     @Test
     fun getInvalidTicket() {

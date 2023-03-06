@@ -8,7 +8,7 @@ interface Vehicle {
     var ticket: Ticket?
 
     fun getVehicleTicket(): Ticket?
-    fun setTicketTo(ticket: Ticket): Boolean
+    fun setTicketTo(ticket: Ticket)
 
-    fun clearTicket(): Boolean
+    fun clearTicket()
 }

@@ -9,14 +9,12 @@ class Spot(private var spotNumber: Int) {
     }
 
     fun isSpotTaken() = vehicle != null
-    fun reserveSpot(vehicle: Vehicle): Boolean {
+
+    fun reserveSpot(vehicle: Vehicle) {
         this.vehicle = vehicle
-        return true
     }
 
-    fun unreserveSpot(): Boolean {
-        if (this.vehicle == null) return false
+    fun unreserveSpot() {
         this.vehicle = null
-        return true
     }
 }
