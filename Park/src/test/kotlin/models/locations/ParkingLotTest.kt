@@ -1,13 +1,16 @@
 package models.locations
 
-import main.exceptions.TicketDoesNotExistException
+import exceptions.TicketDoesNotExistException
 import main.models.*
-import main.models.feecalculators.FeeCalculator
-import main.models.feecalculators.HourlyFeeCalculator
-import main.models.feemodels.CarForParkingLotFeeModel
+import models.feecalculators.FeeCalculator
+import models.feecalculators.HourlyFeeCalculator
+import models.feemodels.CarForParkingLotFeeModel
 import main.models.feemodels.FeeModel
-import main.models.locations.ParkingLot
-import main.models.vehicles.Car
+import models.Floor
+import models.Receipt
+import models.ReceiptBooth
+import models.Ticket
+import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

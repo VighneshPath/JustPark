@@ -1,4 +1,4 @@
-package main.models
+package models
 
 import java.time.LocalDateTime
 
@@ -6,7 +6,7 @@ data class Ticket(
     private val ticketNumber: Long,
     private val spotNumber: Long,
     private val entryDateTime: LocalDateTime,
-    private val floorNumber: Long = 1L
+    private val floorNumber: Int = 1
 ) {
     fun getTicketEntryDateTime(): LocalDateTime {
         return entryDateTime

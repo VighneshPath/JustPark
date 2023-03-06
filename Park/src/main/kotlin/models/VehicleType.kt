@@ -1,4 +1,4 @@
-package main.models
+package models
 
 enum class VehicleType {
     CAR

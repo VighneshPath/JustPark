@@ -1,8 +1,7 @@
 package models
 
-import main.models.Ticket
-import main.models.vehicles.Car
-import main.models.vehicles.Vehicle
+import models.vehicles.Car
+import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

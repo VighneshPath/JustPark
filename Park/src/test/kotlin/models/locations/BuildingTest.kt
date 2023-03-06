@@ -1,15 +1,15 @@
 package models.locations
 
-import main.models.Floor
-import main.models.ReceiptBooth
-import main.models.Ticket
+import models.Floor
+import models.ReceiptBooth
+import models.Ticket
 import main.models.TicketBooth
-import main.models.feecalculators.FeeCalculator
-import main.models.feecalculators.HourlyFeeCalculator
-import main.models.feemodels.CarForParkingLotFeeModel
+import models.feecalculators.FeeCalculator
+import models.feecalculators.HourlyFeeCalculator
+import models.feemodels.CarForParkingLotFeeModel
 import main.models.feemodels.FeeModel
-import main.models.vehicles.Car
-import main.models.vehicles.Vehicle
+import models.vehicles.Car
+import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -24,13 +24,29 @@ class BuildingTest{
     @DisplayName("should create a building with one floor and park a vehicle in it")
     @Test
     fun createBuildingWithOneFloor(){
-        val floors = listOf(Floor(2))
-        val building: Building = Airport(ticketBooth, receiptBooth, floors)
+        val floorSizes = listOf(2L)
+        val building: Building = Airport(ticketBooth, receiptBooth, floorSizes)
         val vehicle: Vehicle = Car()
         val entryTime = LocalDateTime.now()
-        val expectedTicket = Ticket(1L, 1L, entryTime, 1L)
+        val expectedTicket = Ticket(1L, 1L, entryTime, 1)
 
         val actualTicket = building.parkVehicle(vehicle, entryTime)
+
+        assertEquals(expectedTicket, actualTicket)
+    }
+
+    @DisplayName("should create a building with two floors and park vehicle in different floors")
+    @Test
+    fun createBuildingWithMultipleFloorsAndParkInEach(){
+        val floors = listOf(1L, 1L)
+        val building: Building = Airport(ticketBooth, receiptBooth, floors)
+        val vehicle: Vehicle = Car()
+        val vehicle1: Vehicle = Car()
+        val entryTime = LocalDateTime.now()
+        val expectedTicket = Ticket(2L, 1L , entryTime, 2)
+        building.parkVehicle(vehicle, entryTime)
+
+        val actualTicket = building.parkVehicle(vehicle1, entryTime)
 
         assertEquals(expectedTicket, actualTicket)
     }

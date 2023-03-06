@@ -1,8 +1,12 @@
-package main.models.locations
+package models.locations
 
-import main.exceptions.TicketDoesNotExistException
+import exceptions.TicketDoesNotExistException
 import main.models.*
-import main.models.vehicles.Vehicle
+import models.Floor
+import models.Receipt
+import models.ReceiptBooth
+import models.Ticket
+import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
 class ParkingLot(override val ticketBooth: TicketBooth,
