@@ -1,8 +1,14 @@
-package main.models.locations
+package models.locations
 
-import main.models.ReceiptBooth
-import main.models.TicketBooth
+import main.models.*
+import main.models.vehicles.Vehicle
+import java.time.LocalDateTime
 
-class Building(val receiptBooth: ReceiptBooth, val ticketBooth: TicketBooth) {
+interface Building{
+    val ticketBooth: TicketBooth
+    val receiptBooth: ReceiptBooth
+    val floorList: List<Floor>
 
+    fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket?
+    fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt?
 }
