@@ -15,4 +15,8 @@ data class Ticket(
     fun getSpotNumberForTicket(): Long {
         return spotNumber
     }
+
+    fun getFloorNumberForTicket(): Int {
+        return floorNumber
+    }
 }

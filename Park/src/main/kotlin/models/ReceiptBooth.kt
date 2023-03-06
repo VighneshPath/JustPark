@@ -19,7 +19,8 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
             feeCalculator.calculateFee(duration, feeModel.getRate()),
-            exitTime
+            exitTime,
+            ticket.getFloorNumberForTicket()
             )
     }
 }

@@ -9,3 +9,5 @@ class TicketDoesNotExistException: Exception("Ticket does not exist")
 class ParkingLotFullException: Exception("Parking lot is full")
 
 class NoSpotAvailableException: Exception("No spot available")
+
+class InvalidFloorNumberException: Exception("Invalid Floor Number")

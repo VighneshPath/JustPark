@@ -8,11 +8,13 @@ import models.feecalculators.FeeCalculator
 import models.feecalculators.HourlyFeeCalculator
 import models.feemodels.CarForParkingLotFeeModel
 import main.models.feemodels.FeeModel
+import models.Receipt
 import models.vehicles.Car
 import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import java.time.Duration
 import java.time.LocalDateTime
 
 class BuildingTest{
@@ -49,5 +51,28 @@ class BuildingTest{
         val actualTicket = building.parkVehicle(vehicle1, entryTime)
 
         assertEquals(expectedTicket, actualTicket)
+    }
+
+    @DisplayName("should create a building with one floor and park unpark a vehicle to get a receipt")
+    @Test
+    fun createBuildingWithOneFloorAndUnparkAVehicle(){
+        val floorSizes = listOf(2L)
+        val building: Building = Airport(ticketBooth, receiptBooth, floorSizes)
+        val vehicle: Vehicle = Car()
+        val entryTime = LocalDateTime.now()
+        building.parkVehicle(vehicle, entryTime)
+        val exitTime = LocalDateTime.now()
+        val duration = Duration.between(exitTime, entryTime).toHours()
+        val expectedReceipt = Receipt(1L,
+            1L,
+            entryTime,
+            feeCalculator.calculateFee(duration, feeModel.getRate()),
+            exitTime,
+            1
+        )
+
+        val actualReceipt = building.unparkVehicle(vehicle, exitTime)
+
+        assertEquals(expectedReceipt, actualReceipt)
     }
 }

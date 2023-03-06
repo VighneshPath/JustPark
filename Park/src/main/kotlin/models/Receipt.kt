@@ -7,5 +7,6 @@ data class Receipt(
     val spotNumber: Long,
     val entryDateTime: LocalDateTime,
     val fee: Long,
-    val exitDateTime: LocalDateTime
+    val exitDateTime: LocalDateTime,
+    val floorNumber: Int = 1
 )
