@@ -3,12 +3,12 @@ package models.receipts
 import java.time.LocalDateTime
 
 data class NormalReceipt(
-    val receiptNumber: Long,
-    val floorNumber: Int,
-    val spotNumber: Int,
-    val entryDateTime: LocalDateTime,
-    val fee: Long,
-    val exitDateTime: LocalDateTime
+    private val receiptNumber: Long,
+    private val floorNumber: Int,
+    private val spotNumber: Int,
+    private val entryDateTime: LocalDateTime,
+    private val fee: Long,
+    private val exitDateTime: LocalDateTime
 ) : Receipt {
     override fun isNull(): Boolean {
         return false
