@@ -1,6 +1,5 @@
 package models
 
-import main.models.Ticket
 import main.models.TicketBooth
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach

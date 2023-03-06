@@ -1,4 +1,6 @@
-package main.models.feecalculators
+package models.feecalculators
+
+import models.feecalculators.FeeCalculator
 
 class HourlyFeeCalculator: FeeCalculator {
     override fun calculateFee(duration: Long, fare: Long): Long {

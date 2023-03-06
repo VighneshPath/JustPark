@@ -1,8 +1,8 @@
-package main.models.vehicles
+package models.vehicles
 
-import main.models.Ticket
-import main.models.VehicleType
-import main.models.VehicleType.CAR
+import models.Ticket
+import models.VehicleType
+import models.VehicleType.CAR
 
 class Car : Vehicle {
     override val type: VehicleType = CAR

@@ -1,7 +1,7 @@
-package main.models.vehicles
+package models.vehicles
 
-import main.models.Ticket
-import main.models.VehicleType
+import models.Ticket
+import models.VehicleType
 
 interface Vehicle{
     val type: VehicleType

@@ -1,11 +1,12 @@
-package main.models
+package models
 
 import java.time.LocalDateTime
 
 data class Receipt(
-    val receiptNumber: Long,
-    val spotNumber: Long,
-    val entryDateTime: LocalDateTime,
-    val fee: Long,
-    val exitDateTime: LocalDateTime
+    private val receiptNumber: Long,
+    private val spotNumber: Long,
+    private val entryDateTime: LocalDateTime,
+    private val fee: Long,
+    private val exitDateTime: LocalDateTime,
+    private val floorNumber: Int = 1
 )

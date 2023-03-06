@@ -1,7 +1,7 @@
-package main.models
+package models
 
-import main.exceptions.InvalidExitTimeException
-import main.models.feecalculators.FeeCalculator
+import exceptions.InvalidExitTimeException
+import models.feecalculators.FeeCalculator
 import main.models.feemodels.FeeModel
 import java.time.Duration
 import java.time.LocalDateTime
@@ -19,7 +19,8 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
             feeCalculator.calculateFee(duration, feeModel.getRate()),
-            exitTime
+            exitTime,
+            ticket.getFloorNumberForTicket()
             )
     }
 }

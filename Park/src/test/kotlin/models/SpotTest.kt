@@ -1,7 +1,6 @@
 package models
 
-import main.models.Spot
-import main.models.vehicles.Car
+import models.vehicles.Car
 import org.junit.jupiter.api.BeforeEach
 
 import org.junit.jupiter.api.Assertions.*
