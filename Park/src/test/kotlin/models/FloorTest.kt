@@ -1,6 +1,7 @@
 package models
 
 import exceptions.SpotDoesNotExistException
+import models.VehicleType.CAR
 import models.vehicles.Car
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -19,9 +20,9 @@ class FloorTest {
     @DisplayName("should get 1st spot")
     @Test
     fun getFirstAvailableSpot() {
-        val expectedSpot = Spot(1)
+        val expectedSpot = Spot(1, CAR)
 
-        val actualSpot = floor.getNextAvailableSpot()!!
+        val actualSpot = floor.getNextAvailableSpot(CAR)!!
 
         assertEquals(expectedSpot.getSpotsNumber(), actualSpot.getSpotsNumber())
     }
@@ -35,7 +36,7 @@ class FloorTest {
         }
         val expectedSpot: Spot? = null
 
-        val actualSpot = floor.getNextAvailableSpot()
+        val actualSpot = floor.getNextAvailableSpot(CAR)
 
         assertEquals(expectedSpot, actualSpot)
     }

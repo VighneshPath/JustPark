@@ -4,7 +4,10 @@ import constants.VEHICLE_SPOT_LIMIT
 import exceptions.SpotDoesNotExistException
 import models.vehicles.Vehicle
 
-class Floor(private val floorNumber: Int, private val totalSpots: Int = VEHICLE_SPOT_LIMIT) {
+class Floor(
+    private val floorNumber: Int,
+    private val totalSpots: Int = VEHICLE_SPOT_LIMIT
+) {
     private var spots: MutableList<Spot> = mutableListOf()
 
     init {
@@ -13,13 +16,31 @@ class Floor(private val floorNumber: Int, private val totalSpots: Int = VEHICLE_
         }
     }
 
+    fun setSpotsTypes(typeWiseLimit: Map<VehicleType, Int>): Map<VehicleType, Int> {
+        var spotCounter = 1
+        val updatedTypeWiseCount = typeWiseLimit.toMutableMap()
+
+        typeWiseLimit.forEach{
+            for(spotCountForVehicleType in 0 until it.value){
+                if(spotCounter >= spots.size){
+                    return updatedTypeWiseCount
+                }
+                spots[spotCounter].setSpotVehicleType(it.key)
+                spotCounter++
+                updatedTypeWiseCount[it.key] = updatedTypeWiseCount[it.key]!! - 1
+            }
+        }
+
+        return updatedTypeWiseCount
+    }
+
     fun getFloorNumber() = floorNumber
 
-    fun isFull() = getNextAvailableSpot() == null
+    fun isFull(vehicleType: VehicleType) = getNextAvailableSpot(vehicleType) == null
 
-    fun getNextAvailableSpot(): Spot? {
+    fun getNextAvailableSpot(vehicleType: VehicleType): Spot? {
         for (spot in 1..totalSpots) {
-            if (!spots[spot].isSpotTaken()) return spots[spot]
+            if (!spots[spot].isSpotTaken() && spots[spot].getSpotVehicleType() == vehicleType) return spots[spot]
         }
         return null
     }

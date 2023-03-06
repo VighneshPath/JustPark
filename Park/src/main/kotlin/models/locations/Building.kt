@@ -1,8 +1,6 @@
 package models.locations
 
-import exceptions.FloorDoesNotExistException
 import models.*
-import models.receipts.NullReceipt
 import models.receipts.Receipt
 import models.tickets.NullTicket
 import models.tickets.Ticket
@@ -13,8 +11,8 @@ class Building(private val ticketBooth: TicketBooth, private val receiptBooth: R
     Location {
 
     override fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket {
-        val floor = floorTracker.getNextAvailableFloor() ?: return NullTicket()
-        val spot = floor.getNextAvailableSpot() ?: return NullTicket()
+        val floor = floorTracker.getNextAvailableFloor(vehicle.type) ?: return NullTicket()
+        val spot = floor.getNextAvailableSpot(vehicle.type) ?: return NullTicket()
 
         floorTracker.parkVehicleAt(floor.getFloorNumber(), spot.getSpotsNumber(), vehicle)
 

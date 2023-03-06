@@ -3,18 +3,19 @@ package models
 import exceptions.FloorDoesNotExistException
 import models.vehicles.Vehicle
 
-class FloorTracker(floorSizes: List<Int>) {
+class FloorTracker(floorSizes: List<Int>, private var vehicleTypeLimits: Map<VehicleType, Int>) {
     private var floors: MutableList<Floor> = mutableListOf()
     init{
         floors.add(Floor(0, 0))
         for (index in 1..floorSizes.size) {
             floors.add(Floor(index, floorSizes[index - 1]))
+            vehicleTypeLimits = floors[index].setSpotsTypes(vehicleTypeLimits)
         }
     }
 
-    fun getNextAvailableFloor(): Floor? {
+    fun getNextAvailableFloor(vehicleType: VehicleType): Floor? {
         for (index in 1 until floors.size) {
-            if (!floors[index].isFull()) return floors[index]
+            if (!floors[index].isFull(vehicleType)) return floors[index]
         }
 
         return null

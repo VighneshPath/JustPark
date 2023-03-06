@@ -1,5 +1,6 @@
 package models
 
 enum class VehicleType {
-    CAR
+    CAR,
+    TWO_WHEELER
 }
