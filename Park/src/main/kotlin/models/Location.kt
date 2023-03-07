@@ -1,12 +1,8 @@
-package models.locations
+package models
 
-import models.FloorTracker
-import models.ReceiptBooth
-import models.TicketBooth
 import models.receipts.Receipt
 import models.tickets.NullTicket
 import models.tickets.Ticket
-import models.vehicles.Vehicle
 import java.time.LocalDateTime
 
 class Location(
@@ -16,8 +12,8 @@ class Location(
 ) {
 
     fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket {
-        val floor = floorTracker.getNextAvailableFloor(vehicle.type) ?: return NullTicket()
-        val spot = floor.getNextAvailableSpot(vehicle.type) ?: return NullTicket()
+        val floor = floorTracker.getNextAvailableFloor(vehicle.getVehicleType()) ?: return NullTicket()
+        val spot = floor.getNextAvailableSpot(vehicle.getVehicleType()) ?: return NullTicket()
 
         floorTracker.parkVehicleAt(floor.getFloorNumber(), spot.getSpotsNumber(), vehicle)
 
@@ -37,7 +33,7 @@ class Location(
 
         floorTracker.unparkVehicleFrom(floor.getFloorNumber(), ticket.getSpotNumberForTicket())
 
-        val receipt = receiptBooth.getReceipt(ticket, exitTime)
+        val receipt = receiptBooth.getReceipt(vehicle, exitTime)
         vehicle.clearTicket()
 
         return receipt

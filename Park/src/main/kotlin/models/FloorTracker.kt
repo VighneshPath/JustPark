@@ -1,7 +1,6 @@
 package models
 
 import exceptions.FloorDoesNotExistException
-import models.vehicles.Vehicle
 
 class FloorTracker(floorWiseTypeLimit: List<Map<VehicleType, Int>>) {
     private var floors: MutableList<Floor> = mutableListOf()

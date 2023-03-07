@@ -2,7 +2,6 @@ package models
 
 import models.VehicleType.CAR
 import models.VehicleType.TWO_WHEELER
-import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

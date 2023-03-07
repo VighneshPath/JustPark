@@ -3,7 +3,6 @@ package models
 import exceptions.InvalidExitTimeException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
-import models.VehicleType.CAR
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.receipts.Receipt
@@ -23,7 +22,8 @@ class ReceiptBooth(private var feeCalculator: FeeCalculator) {
         return ticket
     }
 
-    fun getReceipt(ticket: Ticket, exitTime: LocalDateTime): Receipt {
+    fun getReceipt(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
+        val ticket = vehicle.getVehicleTicket()!!
         if (exitTime.isBefore(ticket.getTicketEntryDateTime())) throw InvalidExitTimeException()
 
         receiptCounter++
@@ -35,7 +35,7 @@ class ReceiptBooth(private var feeCalculator: FeeCalculator) {
             ticket.getFloorNumberForTicket(),
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
-            feeCalculator.getFinalPrice(duration, CAR),
+            feeCalculator.getFinalPrice(duration, vehicle.getVehicleType()),
             exitTime
         )
     }

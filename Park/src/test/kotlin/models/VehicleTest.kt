@@ -1,7 +1,6 @@
 package models
 
 import models.tickets.NormalTicket
-import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

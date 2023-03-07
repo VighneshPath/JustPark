@@ -1,8 +1,7 @@
 package models
 
-import constants.VEHICLE_SPOT_LIMIT
 import exceptions.SpotDoesNotExistException
-import models.vehicles.Vehicle
+import models.VehicleType.CAR
 
 class Floor(
     private val floorNumber: Int,
@@ -11,7 +10,7 @@ class Floor(
     private var spots: MutableList<Spot> = mutableListOf()
 
     init {
-        spots.add(Spot(0))
+        spots.add(Spot(0, CAR))
         vehicleLimits.forEach{
             for(typeCount in 0 until it.value){
                 spots.add(Spot(spots.size, it.key))

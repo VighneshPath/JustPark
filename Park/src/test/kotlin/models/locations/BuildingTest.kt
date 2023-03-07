@@ -3,15 +3,13 @@ package models.locations
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
-import models.FloorTracker
-import models.ReceiptBooth
-import models.TicketBooth
+import models.*
+import models.LocationType.MALL
 import models.VehicleType.CAR
-import models.feecalculators.MallFeeCalculator
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
-import models.vehicles.Vehicle
+import models.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -28,7 +26,7 @@ class BuildingTest {
 
     @BeforeEach
     fun setUp() {
-        feeCalculator = MallFeeCalculator()
+        feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         receiptBooth = ReceiptBooth(feeCalculator)
         ticketBooth = TicketBooth()
     }

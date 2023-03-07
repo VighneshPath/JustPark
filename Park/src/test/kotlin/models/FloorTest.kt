@@ -2,7 +2,6 @@ package models
 
 import exceptions.SpotDoesNotExistException
 import models.VehicleType.CAR
-import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

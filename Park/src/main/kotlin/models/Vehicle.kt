@@ -1,10 +1,10 @@
-package models.vehicles
+package models
 
 import models.VehicleType
 import models.VehicleType.CAR
 import models.tickets.Ticket
 
-class Vehicle(val type: VehicleType){
+class Vehicle(private val type: VehicleType){
     var ticket: Ticket? = null
     fun getVehicleTicket(): Ticket? {
         return ticket
@@ -16,5 +16,9 @@ class Vehicle(val type: VehicleType){
 
     fun clearTicket() {
         this.ticket = null
+    }
+
+    fun getVehicleType(): VehicleType {
+        return type
     }
 }
