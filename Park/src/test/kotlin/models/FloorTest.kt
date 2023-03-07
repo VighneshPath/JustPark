@@ -14,7 +14,7 @@ class FloorTest {
 
     @BeforeEach
     fun setUp() {
-        floor = Floor(100)
+        floor = Floor(100, mapOf(CAR to 100))
     }
 
     @DisplayName("should get 1st spot")

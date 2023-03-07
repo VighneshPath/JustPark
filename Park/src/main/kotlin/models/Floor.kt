@@ -6,32 +6,17 @@ import models.vehicles.Vehicle
 
 class Floor(
     private val floorNumber: Int,
-    private val totalSpots: Int = VEHICLE_SPOT_LIMIT
+    vehicleLimits: Map<VehicleType, Int> = mapOf(VehicleType.CAR to 1)
 ) {
     private var spots: MutableList<Spot> = mutableListOf()
 
     init {
-        for (spot in 0..totalSpots) {
-            spots.add(Spot(spot))
-        }
-    }
-
-    fun setSpotsTypes(typeWiseLimit: Map<VehicleType, Int>): Map<VehicleType, Int> {
-        var spotCounter = 1
-        val updatedTypeWiseCount = typeWiseLimit.toMutableMap()
-
-        typeWiseLimit.forEach{
-            for(spotCountForVehicleType in 0 until it.value){
-                if(spotCounter >= spots.size){
-                    return updatedTypeWiseCount
-                }
-                spots[spotCounter].setSpotVehicleType(it.key)
-                spotCounter++
-                updatedTypeWiseCount[it.key] = updatedTypeWiseCount[it.key]!! - 1
+        spots.add(Spot(0))
+        vehicleLimits.forEach{
+            for(typeCount in 0 until it.value){
+                spots.add(Spot(spots.size, it.key))
             }
         }
-
-        return updatedTypeWiseCount
     }
 
     fun getFloorNumber() = floorNumber
@@ -39,7 +24,7 @@ class Floor(
     fun isFull(vehicleType: VehicleType) = getNextAvailableSpot(vehicleType) == null
 
     fun getNextAvailableSpot(vehicleType: VehicleType): Spot? {
-        for (spot in 1..totalSpots) {
+        for (spot in 1 until spots.size) {
             if (!spots[spot].isSpotTaken() && spots[spot].getSpotVehicleType() == vehicleType) return spots[spot]
         }
         return null
