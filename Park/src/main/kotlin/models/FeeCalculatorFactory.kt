@@ -8,8 +8,8 @@ import models.feecalculators.StadiumFeeCalculator
 
 object FeeCalculatorFactory {
     fun createFeeCalculator(locationType: LocationType): FeeCalculator {
-        return when(locationType){
-            AIRPORT-> AirportFeeCalculator()
+        return when (locationType) {
+            AIRPORT -> AirportFeeCalculator()
             MALL -> MallFeeCalculator()
             STADIUM -> StadiumFeeCalculator()
         }

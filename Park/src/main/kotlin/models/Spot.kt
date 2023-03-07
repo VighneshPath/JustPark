@@ -3,7 +3,7 @@ package models
 class Spot(private var spotNumber: Int, private var spotForVehicleType: VehicleType) {
     private var vehicle: Vehicle? = null
 
-    fun getSpotVehicleType(): VehicleType{
+    fun getSpotVehicleType(): VehicleType {
         return spotForVehicleType
     }
 

@@ -9,7 +9,6 @@ import models.VehicleType.CAR
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
-import models.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -138,7 +137,7 @@ class BuildingTest {
     @Test
     fun getInvalidTicket() {
         val car = Vehicle(CAR)
-        floorTracker = FloorTracker(listOf( mapOf(CAR to -1)))
+        floorTracker = FloorTracker(listOf(mapOf(CAR to -1)))
         val building = Location(ticketBooth, receiptBooth, floorTracker)
         car.setTicketTo(NormalTicket(1L, -1, -1, LocalDateTime.now()))
 

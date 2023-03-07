@@ -1,7 +1,6 @@
 package models.feecalculators
 
 import models.VehicleType
-import models.VehicleType.CAR
 import models.feemodels.FeeModel
 
 abstract class FeeCalculator {
