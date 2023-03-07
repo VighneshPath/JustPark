@@ -28,6 +28,7 @@ class SpotTest {
 
     @DisplayName("unreserve a spot")
     @Test
+
     fun unreserveASpot() {
         val car = Vehicle(CAR)
         val expectedSpotStatus = false

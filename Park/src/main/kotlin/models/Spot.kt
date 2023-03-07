@@ -19,5 +19,6 @@ class Spot(private var spotNumber: Int, private var spotForVehicleType: VehicleT
 
     fun unreserveSpot() {
         this.vehicle = null
+
     }
 }

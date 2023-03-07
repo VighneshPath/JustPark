@@ -43,6 +43,7 @@ class Floor(
     fun setSpotTo(spotNumber: Int, vehicle: Vehicle): Boolean {
         if (!isSpotTaken(spotNumber)) {
             spots[spotNumber].reserveSpot(vehicle)
+
             return true
         }
         return false
@@ -52,4 +53,5 @@ class Floor(
         checkSpot(spotNumber)
         spots[spotNumber].unreserveSpot()
     }
+
 }

@@ -1,3 +1,4 @@
+
 package exceptions
 
 class InvalidExitTimeException : Exception("Exit time must be later than entry time")

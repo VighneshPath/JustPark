@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
+
 class TicketBoothTest {
     private lateinit var ticketBooth: TicketBooth
 
