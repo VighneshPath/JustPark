@@ -6,7 +6,7 @@ import models.feemodels.FeeModel
 import models.feemodels.FlatFeeModel
 import java.lang.Long.min
 
-class AirportFeeCalculator : FeeCalculator() {
+class AirportFeeCalculator : FeeCalculator {
     override fun getFinalPrice(duration: Long, vehicleType: VehicleType): Long {
         val intervals = AirportFactory.getIntervals(vehicleType)
         val rates = AirportFactory.getRates(vehicleType)
@@ -19,7 +19,7 @@ class AirportFeeCalculator : FeeCalculator() {
             }
             if (duration >= it.start) {
                 val minDuration = min(duration, it.end)
-                finalPrice = super.calculatePrice(feeModel, minDuration - it.start, rates[index])
+                finalPrice = feeModel.calculateFee(minDuration - it.start, rates[index])
             }
         }
 
