@@ -2,7 +2,7 @@ package models
 
 import models.tickets.Ticket
 
-class Vehicle(private val type: VehicleType){
+class Vehicle(private val type: VehicleType) {
     var ticket: Ticket? = null
     fun getVehicleTicket(): Ticket? {
         return ticket

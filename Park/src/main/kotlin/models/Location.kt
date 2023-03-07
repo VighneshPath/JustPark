@@ -27,7 +27,7 @@ class Location(
         return ticket
     }
 
-     fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
+    fun unparkVehicle(vehicle: Vehicle, exitTime: LocalDateTime): Receipt {
         val ticket = receiptBooth.validateTicket(vehicle.getVehicleTicket())
         val floor = floorTracker.getFloor(ticket.getFloorNumberForTicket())
 

@@ -2,8 +2,8 @@ package models
 
 import exceptions.InvalidExitTimeException
 import models.VehicleType.CAR
-import models.feecalculators.MallFeeCalculator
 import models.feecalculators.FeeCalculator
+import models.feecalculators.MallFeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*

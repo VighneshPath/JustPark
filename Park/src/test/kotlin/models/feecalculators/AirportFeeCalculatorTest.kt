@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-class AirportFeeCalculatorTest{
+class AirportFeeCalculatorTest {
     @Test
     @DisplayName("should pay 60 for parking a two wheeler for 9 hours")
-    fun shouldParkTwoWheelerFor5Hours(){
+    fun shouldParkTwoWheelerFor5Hours() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(AIRPORT)
         val expectedPrice = 60L
 
@@ -22,7 +22,7 @@ class AirportFeeCalculatorTest{
 
     @Test
     @DisplayName("should pay 160 for parking a car for 72 hours")
-    fun shouldParkCarFor72Hours(){
+    fun shouldParkCarFor72Hours() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(AIRPORT)
         val expectedPrice = 200L
 
@@ -33,7 +33,7 @@ class AirportFeeCalculatorTest{
 
     @Test
     @DisplayName("should pay 0 for parking a HeavyVehicle")
-    fun shouldPay0ForHeavyVehicle(){
+    fun shouldPay0ForHeavyVehicle() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(AIRPORT)
         val expectedPrice = 0L
 

@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
-class FloorTrackerTest{
+class FloorTrackerTest {
     @Test
     @DisplayName("should create a floor tracker and get an available floor")
-    fun getAvailableFloor(){
+    fun getAvailableFloor() {
         val vehicleTypeLimits = mapOf(CAR to 1)
         val floorTracker = FloorTracker(listOf(vehicleTypeLimits))
         val expectedFloor = Floor(1, vehicleTypeLimits)
@@ -21,7 +21,7 @@ class FloorTrackerTest{
 
     @Test
     @DisplayName("should fill a floor and return the next available floor")
-    fun getNextAvailableFloor(){
+    fun getNextAvailableFloor() {
         val floorTracker = FloorTracker(listOf(mapOf(CAR to 1), mapOf(CAR to 1)))
         val floor = floorTracker.getNextAvailableFloor(CAR)!!
         val car = Vehicle(CAR)
@@ -35,7 +35,7 @@ class FloorTrackerTest{
 
     @Test
     @DisplayName("should get a floor with correct type of vehicle")
-    fun getNextAvailableFloorForTwoWheeler(){
+    fun getNextAvailableFloorForTwoWheeler() {
         val floorTracker = FloorTracker(listOf(mapOf(CAR to 2), mapOf(TWO_WHEELER to 1)))
         val expectedFloor = Floor(2, mapOf(TWO_WHEELER to 1))
 
@@ -46,7 +46,7 @@ class FloorTrackerTest{
 
     @Test
     @DisplayName("should return null if spot for given type doesn't exist")
-    fun getSpotForVehicleWhichCannotPark(){
+    fun getSpotForVehicleWhichCannotPark() {
         val floorTracker = FloorTracker(listOf(mapOf(CAR to 2)))
 
         assertNull(floorTracker.getNextAvailableFloor(TWO_WHEELER))

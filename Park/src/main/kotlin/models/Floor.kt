@@ -11,8 +11,8 @@ class Floor(
 
     init {
         spots.add(Spot(0, CAR))
-        vehicleLimits.forEach{
-            for(typeCount in 0 until it.value){
+        vehicleLimits.forEach {
+            for (typeCount in 0 until it.value) {
                 spots.add(Spot(spots.size, it.key))
             }
         }
