@@ -7,8 +7,7 @@ import models.FloorTracker
 import models.ReceiptBooth
 import models.TicketBooth
 import models.VehicleType.CAR
-import models.feemodels.FeeModel
-import models.feecalculators.CarAirportFeeCalculator
+import models.feecalculators.AirportFeeCalculator
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
@@ -29,7 +28,7 @@ class BuildingTest {
 
     @BeforeEach
     fun setUp() {
-        feeCalculator = CarAirportFeeCalculator()
+        feeCalculator = AirportFeeCalculator()
         receiptBooth = ReceiptBooth(feeCalculator)
         ticketBooth = TicketBooth()
     }
