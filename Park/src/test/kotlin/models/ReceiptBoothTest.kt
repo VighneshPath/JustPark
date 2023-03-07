@@ -14,8 +14,8 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 
 class ReceiptBoothTest {
-    private lateinit var receiptBooth: ReceiptBooth
-    private lateinit var feeCalculator: FeeCalculator
+    private var feeCalculator: FeeCalculator = MallFeeCalculator()
+    private var receiptBooth =ReceiptBooth(feeCalculator)
 
     @BeforeEach
     fun resetReceiptBooth() {

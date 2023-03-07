@@ -2,7 +2,7 @@ package models.feecalculators
 
 import models.FeeCalculatorFactory
 import models.LocationType.MALL
-import models.VehicleType
+import models.VehicleType.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -14,7 +14,7 @@ class MallFeeCalculatorTest {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 50L
 
-        val actualPrice = feeCalculator.getFinalPrice(5, VehicleType.TWO_WHEELER)
+        val actualPrice = feeCalculator.getFinalPrice(5, TWO_WHEELER)
 
         assertEquals(expectedPrice, actualPrice)
     }
@@ -25,7 +25,7 @@ class MallFeeCalculatorTest {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 60L
 
-        val actualPrice = feeCalculator.getFinalPrice(3, VehicleType.CAR)
+        val actualPrice = feeCalculator.getFinalPrice(3, CAR)
 
         assertEquals(expectedPrice, actualPrice)
     }
@@ -36,7 +36,7 @@ class MallFeeCalculatorTest {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 500L
 
-        val actualPrice = feeCalculator.getFinalPrice(10, VehicleType.HEAVY_VEHICLE)
+        val actualPrice = feeCalculator.getFinalPrice(10, HEAVY_VEHICLE)
 
         assertEquals(expectedPrice, actualPrice)
     }

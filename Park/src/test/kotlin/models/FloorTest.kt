@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class FloorTest {
-    private lateinit var floor: Floor
+    private var floor = Floor(100, mapOf(CAR to 100))
 
     @BeforeEach
     fun setUp() {

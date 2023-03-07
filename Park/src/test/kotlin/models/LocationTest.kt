@@ -1,4 +1,4 @@
-package models.locations
+package models
 
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
@@ -17,10 +17,10 @@ import org.junit.jupiter.api.assertThrows
 import java.time.Duration
 import java.time.LocalDateTime
 
-class BuildingTest {
-    private lateinit var feeCalculator: FeeCalculator
-    private lateinit var receiptBooth: ReceiptBooth
-    private lateinit var ticketBooth: TicketBooth
+class LocationTest {
+    private var feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
+    private var receiptBooth = ReceiptBooth(feeCalculator)
+    private var ticketBooth = TicketBooth()
     private lateinit var floorTracker: FloorTracker
 
     @BeforeEach

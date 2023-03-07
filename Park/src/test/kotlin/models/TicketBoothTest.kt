@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class TicketBoothTest {
-    private lateinit var ticketBooth: TicketBooth
+    private var ticketBooth = TicketBooth()
 
     @BeforeEach
     fun resetTicketBooth() {
