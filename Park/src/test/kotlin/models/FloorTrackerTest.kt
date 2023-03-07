@@ -13,7 +13,7 @@ class FloorTrackerTest{
     fun getAvailableFloor(){
         val vehicleTypeLimits = mapOf(CAR to 1)
         val floorTracker = FloorTracker(listOf(vehicleTypeLimits))
-        val expectedFloor = Floor(1)
+        val expectedFloor = Floor(1, vehicleTypeLimits)
 
         val actualFloor = floorTracker.getNextAvailableFloor(CAR)!!
 

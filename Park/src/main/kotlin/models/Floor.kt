@@ -6,7 +6,7 @@ import models.vehicles.Vehicle
 
 class Floor(
     private val floorNumber: Int,
-    vehicleLimits: Map<VehicleType, Int> = mapOf(VehicleType.CAR to 1)
+    vehicleLimits: Map<VehicleType, Int>
 ) {
     private var spots: MutableList<Spot> = mutableListOf()
 

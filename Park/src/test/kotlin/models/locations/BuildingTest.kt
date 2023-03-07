@@ -73,7 +73,7 @@ class BuildingTest {
         building.parkVehicle(car1, entryTime)
         val exitTime = LocalDateTime.now()
         val duration = Duration.between(entryTime, exitTime).toHours()
-        val fee = feeCalculator.getFinalPrice(duration)
+        val fee = feeCalculator.getFinalPrice(duration, CAR)
         val expectedReceipt = NormalReceipt(1L, 1, 1, entryTime, fee, exitTime)
 
         val actualReceipt = building.unparkVehicle(car1, exitTime)
@@ -114,7 +114,7 @@ class BuildingTest {
             1,
             1,
             entryTime,
-            feeCalculator.getFinalPrice(duration),
+            feeCalculator.getFinalPrice(duration, CAR),
             exitTime
         )
 

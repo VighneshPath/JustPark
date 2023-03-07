@@ -4,7 +4,7 @@ import models.VehicleType
 import models.VehicleType.CAR
 import models.tickets.Ticket
 
-class Vehicle(val type: VehicleType = CAR){
+class Vehicle(val type: VehicleType){
     var ticket: Ticket? = null
     fun getVehicleTicket(): Ticket? {
         return ticket

@@ -3,6 +3,7 @@ package models
 import exceptions.InvalidExitTimeException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
+import models.VehicleType.CAR
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.receipts.Receipt
@@ -34,7 +35,7 @@ class ReceiptBooth(private var feeCalculator: FeeCalculator) {
             ticket.getFloorNumberForTicket(),
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
-            feeCalculator.getFinalPrice(duration),
+            feeCalculator.getFinalPrice(duration, CAR),
             exitTime
         )
     }
