@@ -2,7 +2,7 @@ package models
 
 import exceptions.InvalidExitTimeException
 import models.feemodels.FeeModel
-import models.feecalculators.AirportFeeCalculator
+import models.feecalculators.MallFeeCalculator
 import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
@@ -20,7 +20,7 @@ class ReceiptBoothTest {
 
     @BeforeEach
     fun resetReceiptBooth() {
-        feeCalculator = AirportFeeCalculator()
+        feeCalculator = MallFeeCalculator()
         receiptBooth = ReceiptBooth(feeCalculator)
     }
 
