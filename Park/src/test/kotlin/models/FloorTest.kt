@@ -2,7 +2,7 @@ package models
 
 import exceptions.SpotDoesNotExistException
 import models.VehicleType.CAR
-import models.vehicles.Car
+import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -30,7 +30,7 @@ class FloorTest {
     @DisplayName("should fill up all spots and then give null")
     @Test
     fun fillUpSpots() {
-        val car = Car()
+        val car = Vehicle(CAR)
         for (index in 1..100) {
             floor.setSpotTo(index, car)
         }
@@ -45,7 +45,7 @@ class FloorTest {
     @Test
     fun setSpotToVehicleWithError() {
         val unknownSpot = -1
-        val car = Car()
+        val car = Vehicle(CAR)
         val expectedErrorMessage = "Given spot does not exist"
 
         assertThrows<SpotDoesNotExistException>(expectedErrorMessage) { floor.setSpotTo(unknownSpot, car) }
@@ -55,7 +55,7 @@ class FloorTest {
     @Test
     fun setSpotWithVehicleAlreadyPresent() {
         val someSpot = 1
-        val car = Car()
+        val car = Vehicle(CAR)
         floor.setSpotTo(someSpot, car)
         val expectedValue = false
 

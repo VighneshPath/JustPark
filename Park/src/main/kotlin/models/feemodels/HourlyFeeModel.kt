@@ -1,6 +1,6 @@
-package models.feecalculators
+package models.feemodels
 
-class HourlyFeeCalculator : FeeCalculator {
+class HourlyFeeModel : FeeModel {
     override fun calculateFee(duration: Long, fare: Long): Long {
         if (duration < 0) return 0
         if (duration == 0L) return fare

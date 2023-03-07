@@ -2,7 +2,6 @@ package models
 
 import models.VehicleType.CAR
 import models.VehicleType.TWO_WHEELER
-import models.vehicles.Car
 import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
@@ -26,7 +25,7 @@ class FloorTrackerTest{
     fun getNextAvailableFloor(){
         val floorTracker = FloorTracker(listOf(mapOf(CAR to 1), mapOf(CAR to 1)))
         val floor = floorTracker.getNextAvailableFloor(CAR)!!
-        val car: Vehicle = Car()
+        val car = Vehicle(CAR)
         floorTracker.parkVehicleAt(floor.getFloorNumber(), floor.getNextAvailableSpot(CAR)!!.getSpotsNumber(), car)
         val expectedFloor = Floor(2, mapOf(CAR to 1))
 

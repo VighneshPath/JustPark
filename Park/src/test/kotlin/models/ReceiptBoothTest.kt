@@ -1,10 +1,9 @@
 package models
 
 import exceptions.InvalidExitTimeException
-import models.feecalculators.FeeCalculator
-import models.feecalculators.HourlyFeeCalculator
-import models.feemodels.CarForParkingLotFeeModel
 import models.feemodels.FeeModel
+import models.feecalculators.CarAirportFeeCalculator
+import models.feecalculators.FeeCalculator
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
@@ -16,14 +15,13 @@ import java.time.LocalDateTime
 
 class ReceiptBoothTest {
     private lateinit var receiptBooth: ReceiptBooth
-    private lateinit var feeCalculator: FeeCalculator
     private lateinit var feeModel: FeeModel
+    private lateinit var feeCalculator: FeeCalculator
 
     @BeforeEach
     fun resetReceiptBooth() {
-        feeCalculator = HourlyFeeCalculator()
-        feeModel = CarForParkingLotFeeModel()
-        receiptBooth = ReceiptBooth(feeCalculator, feeModel)
+        feeCalculator = CarAirportFeeCalculator()
+        receiptBooth = ReceiptBooth(feeCalculator)
     }
 
     @DisplayName("should get a receipt when a ticket is provided")
@@ -31,7 +29,7 @@ class ReceiptBoothTest {
     fun shouldGetAReceiptWhenGivenATicket() {
         val ticket = NormalTicket(1L, 1, 1, LocalDateTime.now())
         val exitTime = LocalDateTime.now()
-        val expectedReceipt = NormalReceipt(1L, 1, 1, ticket.getTicketEntryDateTime(), 10, exitTime)
+        val expectedReceipt = NormalReceipt(1L, 1, 1, ticket.getTicketEntryDateTime(), 20, exitTime)
 
         val actualReceipt = receiptBooth.getReceipt(ticket, exitTime)
 

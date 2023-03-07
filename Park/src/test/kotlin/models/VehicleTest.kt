@@ -1,7 +1,6 @@
 package models
 
 import models.tickets.NormalTicket
-import models.vehicles.Car
 import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -14,7 +13,7 @@ class VehicleTest {
 
     @BeforeEach
     fun setUp() {
-        vehicle = Car()
+        vehicle = Vehicle(VehicleType.CAR)
     }
 
     @DisplayName("should set ticket for a vehicle")

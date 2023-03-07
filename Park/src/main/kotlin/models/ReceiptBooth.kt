@@ -4,14 +4,13 @@ import exceptions.InvalidExitTimeException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
 import models.feecalculators.FeeCalculator
-import models.feemodels.FeeModel
 import models.receipts.NormalReceipt
 import models.receipts.Receipt
 import models.tickets.Ticket
 import java.time.Duration
 import java.time.LocalDateTime
 
-class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeModel: FeeModel) {
+class ReceiptBooth(private var feeCalculator: FeeCalculator) {
     private var receiptCounter: Long = 0
     fun validateTicket(ticket: Ticket?): Ticket {
         ticket ?: throw TicketDoesNotExistException()
@@ -35,7 +34,7 @@ class ReceiptBooth(private val feeCalculator: FeeCalculator, private var feeMode
             ticket.getFloorNumberForTicket(),
             ticket.getSpotNumberForTicket(),
             ticket.getTicketEntryDateTime(),
-            feeCalculator.calculateFee(duration, feeModel.getRate()),
+            feeCalculator.getFinalPrice(duration),
             exitTime
         )
     }

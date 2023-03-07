@@ -1,6 +1,6 @@
 package models.feemodels
 
 interface FeeModel {
-    fun getRate(): Long
+    fun calculateFee(duration: Long, fare: Long): Long
 }
 

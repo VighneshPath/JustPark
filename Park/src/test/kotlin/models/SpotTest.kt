@@ -1,6 +1,6 @@
 package models
 
-import models.vehicles.Car
+import models.vehicles.Vehicle
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -17,7 +17,7 @@ class SpotTest {
     @DisplayName("reserve a spot")
     @Test
     fun reserveASpot() {
-        val car = Car()
+        val car = Vehicle(VehicleType.CAR)
         val expectedSpotStatus = true
 
         spot.reserveSpot(car)
@@ -29,7 +29,7 @@ class SpotTest {
     @DisplayName("unreserve a spot")
     @Test
     fun unreserveASpot() {
-        val car = Car()
+        val car = Vehicle(VehicleType.CAR)
         val expectedSpotStatus = false
         spot.reserveSpot(car)
 
