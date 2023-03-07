@@ -1,7 +1,5 @@
 package models
 
-import models.VehicleType
-import models.VehicleType.CAR
 import models.tickets.Ticket
 
 class Vehicle(private val type: VehicleType){

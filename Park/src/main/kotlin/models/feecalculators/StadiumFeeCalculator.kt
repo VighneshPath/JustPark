@@ -4,7 +4,6 @@ import models.VehicleType
 import models.feemodels.FeeModel
 import models.feemodels.FlatFeeModel
 import models.feemodels.HourlyFeeModel
-import java.lang.Long.max
 import java.lang.Long.min
 
 class StadiumFeeCalculator: FeeCalculator() {
