@@ -1,3 +1,3 @@
 
-rootProject.name = "Park"
+rootProject.name = "JustPark"
 
