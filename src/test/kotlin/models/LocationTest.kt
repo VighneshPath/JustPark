@@ -36,7 +36,7 @@ class LocationTest {
     fun parkVehicleInFirstFloor() {
         floorTracker = FloorTracker(listOf(mapOf(CAR to 10)))
         val car = Vehicle(CAR)
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         val entryTime = LocalDateTime.now()
         val expectedTicket = NormalTicket(1L, 1, 1, entryTime)
 
@@ -51,7 +51,7 @@ class LocationTest {
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1), mapOf(CAR to 1)))
         val car1 = Vehicle(CAR)
         val car2 = Vehicle(CAR)
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         val entryTime = LocalDateTime.now()
         building.parkVehicle(car1, entryTime)
         val expectedTicket = NormalTicket(2L, 2, 1, entryTime)
@@ -66,7 +66,7 @@ class LocationTest {
     fun unparkInFirstFloor() {
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1)))
         val car1 = Vehicle(CAR)
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         val entryTime = LocalDateTime.now()
         building.parkVehicle(car1, entryTime)
         val exitTime = LocalDateTime.now()
@@ -86,7 +86,7 @@ class LocationTest {
         val car1 = Vehicle(CAR)
         val car2 = Vehicle(CAR)
         val entryTime1 = LocalDateTime.now()
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         building.parkVehicle(car1, entryTime1)
         building.unparkVehicle(car1, LocalDateTime.now())
         val entryTime2 = LocalDateTime.now()
@@ -105,7 +105,7 @@ class LocationTest {
         val entryTime = LocalDateTime.now().minusDays(2)
         val exitTime = LocalDateTime.now()
         val duration = Duration.between(entryTime, exitTime).toHours()
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         building.parkVehicle(car1, entryTime)
         val expectedReceipt = NormalReceipt(
             1L,
@@ -127,7 +127,7 @@ class LocationTest {
         val car1 = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 0)))
         val entryTime = LocalDateTime.now()
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
 
         val actualTicket = building.parkVehicle(car1, entryTime)
 
@@ -139,7 +139,7 @@ class LocationTest {
     fun getInvalidTicket() {
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to -1)))
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         car.setTicketTo(NormalTicket(1L, -1, -1, LocalDateTime.now()))
 
         val expectedErrorMessage = "Invalid ticket"
@@ -152,7 +152,7 @@ class LocationTest {
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
         val entryTime = LocalDateTime.now()
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         building.parkVehicle(car, entryTime)
         car.setTicketTo(NormalTicket(1L, 2, 1, entryTime))
 
@@ -170,7 +170,7 @@ class LocationTest {
     fun getTicketDoesNotExist() {
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
-        val building = Location(ticketBooth, receiptBooth, floorTracker)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
         val exitTime = LocalDateTime.now()
 
         val expectedErrorMessage = "Ticket does not exist"

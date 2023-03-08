@@ -12,7 +12,7 @@ class Location(
     private val ticketBooth: TicketBooth,
     private val receiptBooth: ReceiptBooth,
     private val floorTracker: FloorTracker,
-    private val locationType: LocationType = MALL
+    private val locationType: LocationType
 ) {
     private fun checkVehicleTypeBeforeParking(vehicleType: VehicleType){
         if(unsupportedType(vehicleType)){
