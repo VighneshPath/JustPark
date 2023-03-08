@@ -11,7 +11,7 @@ class MallFeeCalculator : FeeCalculator {
         return feeModel.calculateFee(duration, feePerHour)
     }
 
-    fun getRate(vehicleType: VehicleType): Long {
+    private fun getRate(vehicleType: VehicleType): Long {
         return when (vehicleType) {
             VehicleType.CAR -> 20L
             VehicleType.TWO_WHEELER -> 10L

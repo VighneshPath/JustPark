@@ -26,7 +26,7 @@ class StadiumFeeCalculator : FeeCalculator {
         return finalPrice
     }
 
-    fun getIntervals(vehicleType: VehicleType): List<Interval> {
+    private fun getIntervals(vehicleType: VehicleType): List<Interval> {
         return when (vehicleType) {
             VehicleType.TWO_WHEELER -> listOf(Interval(0L, 4L), Interval(4L, 12L), Interval(12L, Long.MAX_VALUE))
             VehicleType.CAR -> listOf(Interval(0L, 4L), Interval(4L, 12L), Interval(12L, Long.MAX_VALUE))
@@ -34,7 +34,7 @@ class StadiumFeeCalculator : FeeCalculator {
         }
     }
 
-    fun getRates(vehicleType: VehicleType): List<Long> {
+    private fun getRates(vehicleType: VehicleType): List<Long> {
         return when (vehicleType) {
             VehicleType.TWO_WHEELER -> listOf(30L, 60L, 100L)
             VehicleType.CAR -> listOf(60L, 120L, 200L)
