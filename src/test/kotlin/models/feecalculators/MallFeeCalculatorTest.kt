@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test
 
 class MallFeeCalculatorTest {
     @Test
-    @DisplayName("should pay 50 for parking a two wheeler for 5 hours")
+    @DisplayName("should pay 250 for parking a two wheeler for 5 hours")
     fun shouldParkTwoWheelerFor5Hours() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
-        val expectedPrice = 50L
+        val expectedPrice = 250L
 
         val actualPrice = feeCalculator.getFinalPrice(5, TWO_WHEELER)
 
@@ -20,10 +20,10 @@ class MallFeeCalculatorTest {
     }
 
     @Test
-    @DisplayName("should pay 60 for parking a car for 3 hours")
+    @DisplayName("should pay 180 for parking a car for 3 hours")
     fun shouldParkCarFor16Hours() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
-        val expectedPrice = 60L
+        val expectedPrice = 180L
 
         val actualPrice = feeCalculator.getFinalPrice(3, CAR)
 
@@ -31,10 +31,10 @@ class MallFeeCalculatorTest {
     }
 
     @Test
-    @DisplayName("should pay 500 for parking a Heavy Vehicle for 10 hours")
+    @DisplayName("should pay 5000 for parking a Heavy Vehicle for 10 hours")
     fun shouldPay0ForHeavyVehicle() {
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
-        val expectedPrice = 500L
+        val expectedPrice = 5000L
 
         val actualPrice = feeCalculator.getFinalPrice(10, HEAVY_VEHICLE)
 

@@ -4,6 +4,7 @@ import exceptions.InvalidExitTimeException
 import models.VehicleType.CAR
 import models.feecalculators.FeeCalculator
 import models.feecalculators.MallFeeCalculator
+import models.feedata.MallFeeData
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
@@ -14,12 +15,12 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 
 class ReceiptBoothTest {
-    private var feeCalculator: FeeCalculator = MallFeeCalculator()
+    private var feeCalculator: FeeCalculator = MallFeeCalculator(MallFeeData())
     private var receiptBooth =ReceiptBooth(feeCalculator)
 
     @BeforeEach
     fun resetReceiptBooth() {
-        feeCalculator = MallFeeCalculator()
+        feeCalculator = MallFeeCalculator(MallFeeData())
         receiptBooth = ReceiptBooth(feeCalculator)
     }
 

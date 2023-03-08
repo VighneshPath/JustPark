@@ -1,21 +1,25 @@
 package models.feecalculators
 
 import models.VehicleType
+import models.feedata.FeeData
 import models.feemodels.FeeModel
 import models.feemodels.HourlyFeeModel
 
-class MallFeeCalculator : FeeCalculator {
+class MallFeeCalculator(override val feeData: FeeData) : FeeCalculator {
     override fun getFinalPrice(duration: Long, vehicleType: VehicleType): Long {
-        val feePerHour = getRate(vehicleType)
+        val rates = feeData.getRates(vehicleType)
+        val intervals = feeData.getIntervals(vehicleType)
         val feeModel : FeeModel = HourlyFeeModel()
-        return feeModel.calculateFee(duration, feePerHour)
-    }
 
-    private fun getRate(vehicleType: VehicleType): Long {
-        return when (vehicleType) {
-            VehicleType.CAR -> 20L
-            VehicleType.TWO_WHEELER -> 10L
-            VehicleType.HEAVY_VEHICLE -> 50L
+        var finalPrice = 0L
+
+        intervals.forEachIndexed { index, it ->
+            if (duration >= it.start) {
+                val minDuration = java.lang.Long.min(duration, it.end)
+                finalPrice = feeModel.calculateFee(minDuration - it.start, rates[index])
+            }
         }
+
+        return feeModel.calculateFee(duration, finalPrice)
     }
 }
