@@ -9,3 +9,5 @@ class TicketDoesNotExistException : Exception("Ticket does not exist")
 class FloorDoesNotExistException : Exception("Floor does not exist")
 
 class InvalidTicketException : Exception("Ticket is not valid")
+
+class CannotParkVehicleInLocationException: Exception("Cannot park vehicle in location")

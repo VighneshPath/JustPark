@@ -1,12 +1,13 @@
 package models
 
+import exceptions.CannotParkVehicleInLocationException
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
 import models.*
-import models.LocationType.MALL
+import models.LocationType.*
 import models.VehicleType.CAR
-import models.feecalculators.FeeCalculator
+import models.VehicleType.HEAVY_VEHICLE
 import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
@@ -174,6 +175,20 @@ class LocationTest {
 
         val expectedErrorMessage = "Ticket does not exist"
         assertThrows<TicketDoesNotExistException>(expectedErrorMessage) { building.unparkVehicle(car, exitTime) }
+    }
+
+    @DisplayName("should throw an exception if a HeavyVehicle is parked at an Airport does not exist exception")
+    @Test
+    fun shouldNotBeAbleToParkAHeavyVehicleInAnAirport() {
+        val car = Vehicle(HEAVY_VEHICLE)
+        floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
+        feeCalculator = FeeCalculatorFactory.createFeeCalculator(AIRPORT)
+        receiptBooth = ReceiptBooth(feeCalculator)
+        val building = Location(ticketBooth, receiptBooth, floorTracker, AIRPORT)
+        val exitTime = LocalDateTime.now()
+
+        val expectedErrorMessage = "Cannot park vehicle in location"
+        assertThrows<CannotParkVehicleInLocationException>(expectedErrorMessage) { building.parkVehicle(car, exitTime) }
     }
 
 }

@@ -1,5 +1,8 @@
 package models
 
+import exceptions.CannotParkVehicleInLocationException
+import models.LocationType.*
+import models.VehicleType.HEAVY_VEHICLE
 import models.receipts.Receipt
 import models.tickets.NullTicket
 import models.tickets.Ticket
@@ -8,10 +11,20 @@ import java.time.LocalDateTime
 class Location(
     private val ticketBooth: TicketBooth,
     private val receiptBooth: ReceiptBooth,
-    private val floorTracker: FloorTracker
+    private val floorTracker: FloorTracker,
+    private val locationType: LocationType = MALL
 ) {
+    private fun checkVehicleTypeBeforeParking(vehicleType: VehicleType){
+        if(unsupportedType(vehicleType)){
+            throw CannotParkVehicleInLocationException()
+        }
+    }
+
+    private fun unsupportedType(vehicleType: VehicleType) =
+        vehicleType == HEAVY_VEHICLE && (locationType == AIRPORT || locationType == STADIUM)
 
     fun parkVehicle(vehicle: Vehicle, entryTime: LocalDateTime): Ticket {
+        checkVehicleTypeBeforeParking(vehicle.getVehicleType())
         val floor = floorTracker.getNextAvailableFloor(vehicle.getVehicleType()) ?: return NullTicket()
         val spot = floor.getNextAvailableSpot(vehicle.getVehicleType()) ?: return NullTicket()
 
