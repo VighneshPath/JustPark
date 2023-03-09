@@ -4,13 +4,11 @@ import models.FeeCalculatorFactory
 import models.LocationType.MALL
 import models.VehicleType.*
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class MallFeeCalculatorTest {
     @Test
-    @DisplayName("should pay 250 for parking a two wheeler for 5 hours")
-    fun shouldParkTwoWheelerFor5Hours() {
+    fun `should pay 250 for parking a two wheeler for 5 hours`(){
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 250L
 
@@ -20,8 +18,7 @@ class MallFeeCalculatorTest {
     }
 
     @Test
-    @DisplayName("should pay 180 for parking a car for 3 hours")
-    fun shouldParkCarFor16Hours() {
+    fun `should pay 180 for parking a car for 3 hours`(){
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 180L
 
@@ -31,8 +28,7 @@ class MallFeeCalculatorTest {
     }
 
     @Test
-    @DisplayName("should pay 5000 for parking a Heavy Vehicle for 10 hours")
-    fun shouldPay0ForHeavyVehicle() {
+    fun `should pay 5000 for parking a Heavy Vehicle for 10 hours`(){
         val feeCalculator = FeeCalculatorFactory.createFeeCalculator(MALL)
         val expectedPrice = 5000L
 

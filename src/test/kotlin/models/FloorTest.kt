@@ -4,7 +4,6 @@ import exceptions.SpotDoesNotExistException
 import models.VehicleType.CAR
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -16,9 +15,8 @@ class FloorTest {
         floor = Floor(100, mapOf(CAR to 100))
     }
 
-    @DisplayName("should get 1st spot")
     @Test
-    fun getFirstAvailableSpot() {
+    fun `should get 1st spot`(){
         val expectedSpot = Spot(1, CAR)
 
         val actualSpot = floor.getNextAvailableSpot(CAR)!!
@@ -26,9 +24,8 @@ class FloorTest {
         assertEquals(expectedSpot.getSpotsNumber(), actualSpot.getSpotsNumber())
     }
 
-    @DisplayName("should fill up all spots and then give null")
     @Test
-    fun fillUpSpots() {
+    fun `should fill up all spots and then give null`(){
         val car = Vehicle(CAR)
         for (index in 1..100) {
             floor.setSpotTo(index, car)
@@ -40,9 +37,8 @@ class FloorTest {
         assertEquals(expectedSpot, actualSpot)
     }
 
-    @DisplayName("should throw exception if setting to invalid spot")
     @Test
-    fun setSpotToVehicleWithError() {
+    fun `should throw exception if setting to invalid spot`(){
         val unknownSpot = -1
         val car = Vehicle(CAR)
         val expectedErrorMessage = "Given spot does not exist"
@@ -50,9 +46,8 @@ class FloorTest {
         assertThrows<SpotDoesNotExistException>(expectedErrorMessage) { floor.setSpotTo(unknownSpot, car) }
     }
 
-    @DisplayName("should return false if vehicle is already parked in spot")
     @Test
-    fun setSpotWithVehicleAlreadyPresent() {
+    fun `should return false if vehicle is already parked in spot`(){
         val someSpot = 1
         val car = Vehicle(CAR)
         floor.setSpotTo(someSpot, car)

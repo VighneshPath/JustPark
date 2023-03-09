@@ -4,7 +4,6 @@ import exceptions.CannotParkVehicleInLocationException
 import exceptions.FloorDoesNotExistException
 import exceptions.InvalidTicketException
 import exceptions.TicketDoesNotExistException
-import models.*
 import models.LocationType.*
 import models.VehicleType.CAR
 import models.VehicleType.HEAVY_VEHICLE
@@ -12,7 +11,6 @@ import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.Duration
@@ -31,9 +29,8 @@ class LocationTest {
         ticketBooth = TicketBooth()
     }
 
-    @DisplayName("should park a vehicle in the floor created")
     @Test
-    fun parkVehicleInFirstFloor() {
+    fun `should park a vehicle in the floor created`(){
         floorTracker = FloorTracker(listOf(mapOf(CAR to 10)))
         val car = Vehicle(CAR)
         val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
@@ -45,9 +42,8 @@ class LocationTest {
         assertEquals(expectedTicket, actualTicket)
     }
 
-    @DisplayName("should park a vehicle in the available floor")
     @Test
-    fun parkVehicleInAvailableFloor() {
+    fun `should park a vehicle in the available floor`(){
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1), mapOf(CAR to 1)))
         val car1 = Vehicle(CAR)
         val car2 = Vehicle(CAR)
@@ -61,9 +57,8 @@ class LocationTest {
         assertEquals(expectedTicket, actualTicket)
     }
 
-    @DisplayName("should unpark a vehicle in the 1st floor")
     @Test
-    fun unparkInFirstFloor() {
+    fun `should unpark a vehicle in the 1st floor`(){
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1)))
         val car1 = Vehicle(CAR)
         val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
@@ -79,9 +74,8 @@ class LocationTest {
         assertEquals(expectedReceipt, actualReceipt)
     }
 
-    @DisplayName("should give the 1st unparked vehicles spot to a new vehicle")
     @Test
-    fun reuseSpotForPark() {
+    fun `should give the 1st unparked vehicles spot to a new vehicle`(){
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1)))
         val car1 = Vehicle(CAR)
         val car2 = Vehicle(CAR)
@@ -97,9 +91,8 @@ class LocationTest {
         assertEquals(expectedTicket, actualTicket)
     }
 
-    @DisplayName("should park a vehicle for multiple hours")
     @Test
-    fun parkForMultipleHours() {
+    fun `should park a vehicle for multiple hours`(){
         val car1 = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 1)))
         val entryTime = LocalDateTime.now().minusDays(2)
@@ -121,9 +114,8 @@ class LocationTest {
         assertEquals(expectedReceipt, actualReceipt)
     }
 
-    @DisplayName("should get a null ticket")
     @Test
-    fun getANullTicket() {
+    fun `should get a null ticket`(){
         val car1 = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 0)))
         val entryTime = LocalDateTime.now()
@@ -134,9 +126,8 @@ class LocationTest {
         assertEquals(true, actualTicket.isNull())
     }
 
-    @DisplayName("should throw an invalid ticket exception")
     @Test
-    fun getInvalidTicket() {
+    fun `should throw an invalid ticket exception`(){
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to -1)))
         val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
@@ -146,9 +137,8 @@ class LocationTest {
         assertThrows<InvalidTicketException>(expectedErrorMessage) { building.unparkVehicle(car, LocalDateTime.now()) }
     }
 
-    @DisplayName("should throw an invalid floor exception")
     @Test
-    fun getInvalidFloor() {
+    fun `should throw an invalid floor exception`(){
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
         val entryTime = LocalDateTime.now()
@@ -165,9 +155,8 @@ class LocationTest {
         }
     }
 
-    @DisplayName("should throw ticket does not exist exception")
     @Test
-    fun getTicketDoesNotExist() {
+    fun `should throw ticket does not exist exception`(){
         val car = Vehicle(CAR)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
         val building = Location(ticketBooth, receiptBooth, floorTracker, MALL)
@@ -177,9 +166,8 @@ class LocationTest {
         assertThrows<TicketDoesNotExistException>(expectedErrorMessage) { building.unparkVehicle(car, exitTime) }
     }
 
-    @DisplayName("should throw an exception if a HeavyVehicle is parked at an Airport does not exist exception")
     @Test
-    fun shouldNotBeAbleToParkAHeavyVehicleInAnAirport() {
+    fun `should throw an exception if a HeavyVehicle is parked at an Airport does not exist exception`(){
         val car = Vehicle(HEAVY_VEHICLE)
         floorTracker = FloorTracker(listOf(mapOf(CAR to 3)))
         feeCalculator = FeeCalculatorFactory.createFeeCalculator(AIRPORT)

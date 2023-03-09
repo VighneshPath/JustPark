@@ -4,7 +4,6 @@ import models.VehicleType.CAR
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -16,9 +15,8 @@ class VehicleTest {
         vehicle = Vehicle(CAR)
     }
 
-    @DisplayName("should set ticket for a vehicle")
     @Test
-    fun setVehicleTicket() {
+    fun `should set ticket for a vehicle`(){
         val entryTime = LocalDateTime.now()
         val ticket = NormalTicket(1L, 1, 1, entryTime)
 

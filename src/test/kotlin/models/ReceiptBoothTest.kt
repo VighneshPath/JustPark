@@ -9,7 +9,6 @@ import models.receipts.NormalReceipt
 import models.tickets.NormalTicket
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
@@ -24,9 +23,8 @@ class ReceiptBoothTest {
         receiptBooth = ReceiptBooth(feeCalculator)
     }
 
-    @DisplayName("should get a receipt when a ticket is provided")
     @Test
-    fun shouldGetAReceiptWhenGivenATicket() {
+    fun `should get a receipt when a ticket is provided`(){
         val vehicle = Vehicle(CAR)
         val ticket = NormalTicket(1L, 1, 1, LocalDateTime.now())
         vehicle.setTicketTo(ticket)
@@ -38,9 +36,8 @@ class ReceiptBoothTest {
         assertEquals(expectedReceipt, actualReceipt)
     }
 
-    @DisplayName("should throw an exception if exit time provided is less that entry time")
     @Test
-    fun shouldThrowAnErrorForInvalidExitTime() {
+    fun `should throw an exception if exit time provided is less that entry time`(){
         val vehicle = Vehicle(CAR)
         val ticket = NormalTicket(1L, 1, 1, LocalDateTime.now())
         vehicle.setTicketTo(ticket)

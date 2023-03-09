@@ -15,9 +15,8 @@ class TicketBoothTest {
         ticketBooth = TicketBooth()
     }
 
-    @DisplayName("should get a ticket for a spot and entry time")
     @Test
-    fun getTicketForSpotAndEntry() {
+    fun `should get a ticket for a spot and entry time`(){
         val entryTime = LocalDateTime.now()
         val spotNumber = 1
         val expectedTicket = NormalTicket(1L, 1, spotNumber, entryTime)
