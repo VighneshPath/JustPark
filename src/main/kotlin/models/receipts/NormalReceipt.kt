@@ -10,7 +10,5 @@ data class NormalReceipt(
     private val fee: Long,
     private val exitDateTime: LocalDateTime
 ) : Receipt {
-    override fun isNull(): Boolean {
-        return false
-    }
+    override fun isNull() = false
 }

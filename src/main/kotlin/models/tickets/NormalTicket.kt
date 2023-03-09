@@ -8,19 +8,10 @@ data class NormalTicket(
     private val spotNumber: Int,
     private val entryDateTime: LocalDateTime
 ) : Ticket {
-    override fun getTicketEntryDateTime(): LocalDateTime {
-        return entryDateTime
-    }
+    override fun getTicketEntryDateTime() = entryDateTime
 
-    override fun getSpotNumberForTicket(): Int {
-        return spotNumber
-    }
+    override fun getSpotNumberForTicket() = spotNumber
 
-    override fun getFloorNumberForTicket(): Int {
-        return floorNumber
-    }
-
-    override fun isNull(): Boolean {
-        return false
-    }
+    override fun getFloorNumberForTicket() = floorNumber
+    override fun isNull() = false
 }

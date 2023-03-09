@@ -20,17 +20,6 @@ class FloorTracker(floorWiseTypeLimit: List<Map<VehicleType, Int>>) {
         return null
     }
 
-    private fun checkFloor(floorNumber: Int) {
-        if (floorNumber >= floors.size || floorNumber <= 0) {
-            throw FloorDoesNotExistException()
-        }
-    }
-
-    fun getFloor(floorNumber: Int): Floor {
-        checkFloor(floorNumber)
-        return floors[floorNumber]
-    }
-
     fun parkVehicleAt(floorNumber: Int, spotNumber: Int, vehicle: Vehicle) {
         val floor = getFloor(floorNumber)
         floor.setSpotTo(spotNumber, vehicle)
@@ -39,6 +28,17 @@ class FloorTracker(floorWiseTypeLimit: List<Map<VehicleType, Int>>) {
     fun unparkVehicleFrom(floorNumber: Int, spotNumber: Int) {
         val floor = getFloor(floorNumber)
         floor.clearSpot(spotNumber)
+    }
+
+    private fun checkFloor(floorNumber: Int) {
+        if (floorNumber >= floors.size || floorNumber <= 0) {
+            throw FloorDoesNotExistException()
+        }
+    }
+
+    private fun getFloor(floorNumber: Int): Floor {
+        checkFloor(floorNumber)
+        return floors[floorNumber]
     }
 
 }

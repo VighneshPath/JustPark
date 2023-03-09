@@ -4,9 +4,7 @@ import models.tickets.Ticket
 
 class Vehicle(private val type: VehicleType) {
     var ticket: Ticket? = null
-    fun getVehicleTicket(): Ticket? {
-        return ticket
-    }
+    fun getVehicleTicket() = ticket
 
     fun setTicketTo(ticket: Ticket) {
         this.ticket = ticket
@@ -16,7 +14,5 @@ class Vehicle(private val type: VehicleType) {
         this.ticket = null
     }
 
-    fun getVehicleType(): VehicleType {
-        return type
-    }
+    fun getVehicleType() = type
 }

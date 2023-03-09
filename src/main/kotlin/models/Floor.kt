@@ -28,18 +28,6 @@ class Floor(
         }
         return null
     }
-
-    private fun checkSpot(spotNumber: Int) {
-        if (spotNumber >= spots.size || spotNumber <= 0) {
-            throw SpotDoesNotExistException()
-        }
-    }
-
-    private fun isSpotTaken(spotNumber: Int): Boolean {
-        checkSpot(spotNumber)
-        return spots[spotNumber].isSpotTaken()
-    }
-
     fun setSpotTo(spotNumber: Int, vehicle: Vehicle): Boolean {
         if (!isSpotTaken(spotNumber)) {
             spots[spotNumber].reserveSpot(vehicle)
@@ -52,4 +40,16 @@ class Floor(
         checkSpot(spotNumber)
         spots[spotNumber].unreserveSpot()
     }
+
+    private fun checkSpot(spotNumber: Int) {
+        if (spotNumber >= spots.size || spotNumber <= 0) {
+            throw SpotDoesNotExistException()
+        }
+    }
+
+    private fun isSpotTaken(spotNumber: Int): Boolean {
+        checkSpot(spotNumber)
+        return spots[spotNumber].isSpotTaken()
+    }
+
 }

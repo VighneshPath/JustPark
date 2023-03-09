@@ -3,13 +3,9 @@ package models
 class Spot(private var spotNumber: Int, private var spotForVehicleType: VehicleType) {
     private var vehicle: Vehicle? = null
 
-    fun getSpotVehicleType(): VehicleType {
-        return spotForVehicleType
-    }
+    fun getSpotVehicleType() = spotForVehicleType
 
-    fun getSpotsNumber(): Int {
-        return spotNumber
-    }
+    fun getSpotsNumber() = spotNumber
 
     fun isSpotTaken() = vehicle != null
 
